@@ -177,7 +177,7 @@ def build_contracts(snaps, refs):
             rooms.append(row)
         out.append({"id": c["id"], "name": c["name"], "found": h is not None,
                     "booking_id": h and h["id"], "booking_name": h and h["name"], "url": h and h["url"],
-                    "rooms": rooms,
+                    "rooms": rooms, "booking_rooms": len((h or {}).get("rooms", [])),
                     "unmatched": sorted({r["name"] for r in (h or {}).get("rooms", []) if r["name"] not in used})})
     return out
 

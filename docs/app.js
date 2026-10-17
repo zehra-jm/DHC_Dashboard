@@ -327,6 +327,7 @@
       html += '<section class="contract" id="dhc-' + esc(h.id) + '"><h2>' + esc(h.name) +
         (rates && rates.hotels[h.id] ? ' <span>' + esc(rates.hotels[h.id].letter) + '</span>' : '') + '</h2>' +
         (!h.found ? '<p class="na">Not found on Booking.com in the latest run.</p>' :
+        h.booking_rooms === 0 ? '<p class="na">Found on Booking.com, but no rooms were on sale for tomorrow night in the latest run.</p>' :
         '<div class="scroll"><table class="ctable"><thead><tr><th>Room (rate letter)</th><th>Booking.com room</th><th>Corporate + tax</th><th>DHC website</th><th>Booking.com</th><th>vs corporate</th><th>vs DHC website</th><th>vs yesterday</th><th>30 days</th></tr></thead><tbody>' +
         hr.map(x => '<tr' + (x.v ? ' class="v-' + x.v.cls + '"' : '') + '><td class="hname">' + esc(x.r.name) + (x.c ? '<span class="sub">' + esc(x.c.basis) + (x.c.derived ? ' · single + extra person' : '') + (x.c.taxIncluded ? ' · letter price includes tax' : '') + '</span>' : '') + '</td>' +
           '<td class="bname">' + (x.r.match ? esc(x.r.match.booking_room) + '<span class="sub">' + (x.r.match.meal === 'breakfast' ? 'Breakfast included' : 'Room only') + (x.r.match.total == null ? ' · taxes not shown' : '') + '</span>' : '<span class="na">No matching room</span>') + '</td>' +
