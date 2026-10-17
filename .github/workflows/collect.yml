@@ -1,0 +1,104 @@
+name: Collect rates
+
+on:
+  schedule:
+    - cron: "17 */3 * * *"   # every 3 hours (GitHub may start it a few minutes late)
+  workflow_dispatch:
+    inputs:
+      collect:
+        description: "Collect new rates (untick to only rebuild and redeploy the dashboard)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  issues: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: collect
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        if: github.event_name == 'schedule' || inputs.collect
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Collect rates from Booking.com
+        id: collect
+        if: github.event_name == 'schedule' || inputs.collect
+        continue-on-error: true   # still publish the warning bar when Booking.com changes or blocks
+        run: python collector/collect.py
+
+      - name: Keep the page Booking.com served, for fixing the collector
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug
+          path: debug/
+          if-no-files-found: ignore
+
+      - name: Build dashboard data
+        run: python collector/build.py
+
+      - name: Save snapshot to the repository
+        run: |
+          git config user.name "rate-collector"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A data docs/data
+          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
+          git commit -m "Rates $(TZ=Asia/Karachi date '+%Y-%m-%d %H:%M') PKT"
+          for i in 1 2 3; do git pull --rebase --quiet && git push && break; sleep 5; done
+
+      - name: Open an issue when the collector needs fixing
+        if: steps.collect.outputs.alert == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create collector-broken --color B0402C --description "Booking.com page changed or blocked" 2>/dev/null || true
+          if [ -z "$(gh issue list --label collector-broken --state open --json number -q '.[].number')" ]; then
+            msg=$(python -c "import json;s=json.load(open('data/status.json'));print(s['state']+': '+s['message'])")
+            gh issue create --label collector-broken \
+              --title "Rate collector needs fixing ($(TZ=Asia/Karachi date '+%d %b %H:%M') PKT)" \
+              --body "$msg
+
+          Last good collection: $(python -c "import json;print(json.load(open('data/status.json'))['last_ok'])")
+          Run with the saved page (download \`debug\`): ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          fi
+
+      - name: Close the issue once collection works again
+        if: steps.collect.outputs.state == 'ok'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for n in $(gh issue list --label collector-broken --state open --json number -q '.[].number'); do
+            gh issue close "$n" --comment "Collector is working again as of $(TZ=Asia/Karachi date '+%d %b %H:%M') PKT."
+          done
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+      - id: deploy
+        uses: actions/deploy-pages@v4
+
+      - name: Mark the run as failed if collection failed
+        if: steps.collect.outcome == 'failure'
+        run: exit 1

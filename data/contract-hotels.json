@@ -1,0 +1,935 @@
+{
+ "note": "Hotels with DHC rate letters and the room types named in each letter. No rates here: those stay in the private rate sheet.",
+ "hotels": [
+  {
+   "id": "reserve",
+   "name": "The Reserve Hotel",
+   "booking_url": "https://www.booking.com/hotel/pk/the-reserve.html",
+   "name_keys": [
+    "reserve"
+   ],
+   "rooms": [
+    {
+     "id": "deluxe",
+     "name": "Deluxe Room (Bed & Breakfast)",
+     "keys": [
+      [
+       "deluxe"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "executive",
+     "name": "Executive Room (Bed & Breakfast)",
+     "keys": [
+      [
+       "executive"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "royal-suite",
+     "name": "Royal Suite (Bed & Breakfast)",
+     "keys": [
+      [
+       "royal"
+      ]
+     ],
+     "exclude": []
+    },
+    {
+     "id": "deluxe-suite",
+     "name": "Deluxe Suite (Bed & Breakfast)",
+     "keys": [
+      [
+       "deluxe",
+       "suite"
+      ]
+     ],
+     "exclude": []
+    }
+   ]
+  },
+  {
+   "id": "marriott",
+   "name": "Karachi Marriott Hotel",
+   "booking_url": "https://www.booking.com/hotel/pk/karachi-marriott.html",
+   "name_keys": [
+    "marriott"
+   ],
+   "rooms": [
+    {
+     "id": "deluxe",
+     "name": "Deluxe Room",
+     "keys": [
+      [
+       "deluxe"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "superior",
+     "name": "Superior Room",
+     "keys": [
+      [
+       "superior"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "executive",
+     "name": "Executive Room",
+     "keys": [
+      [
+       "executive"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "galaxy",
+   "name": "Hotel Galaxy",
+   "booking_url": "https://www.booking.com/hotel/pk/one-karachi-karachi3.html",
+   "name_keys": [
+    "hotel galaxy"
+   ],
+   "rooms": [
+    {
+     "id": "standard",
+     "name": "Standard Room (Single Room / Double Room)",
+     "keys": [
+      [
+       "standard"
+      ],
+      [
+       "double"
+      ],
+      [
+       "single"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "galaxy-suite",
+     "name": "Galaxy Suite With Pantry",
+     "keys": [
+      [
+       "galaxy",
+       "suite"
+      ],
+      [
+       "pantry"
+      ]
+     ],
+     "exclude": []
+    },
+    {
+     "id": "executive-floor",
+     "name": "Executive Floor",
+     "keys": [
+      [
+       "executive"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "deluxe-suite",
+     "name": "Deluxe Suite",
+     "keys": [
+      [
+       "deluxe",
+       "suite"
+      ]
+     ],
+     "exclude": []
+    },
+    {
+     "id": "vip-suite",
+     "name": "VIP Suite",
+     "keys": [
+      [
+       "vip"
+      ]
+     ],
+     "exclude": []
+    }
+   ]
+  },
+  {
+   "id": "excelsior",
+   "name": "Hotel Excelsior Karachi",
+   "booking_url": "https://www.booking.com/hotel/pk/excelsior-karachi.html",
+   "name_keys": [
+    "excelsior"
+   ],
+   "rooms": [
+    {
+     "id": "deluxe",
+     "name": "Deluxe Room",
+     "keys": [
+      [
+       "deluxe"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "superior",
+     "name": "Superior Room",
+     "keys": [
+      [
+       "superior"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "junior-suite",
+     "name": "Junior Suite",
+     "keys": [
+      [
+       "junior"
+      ]
+     ],
+     "exclude": []
+    },
+    {
+     "id": "executive-suite",
+     "name": "Executive Suite",
+     "keys": [
+      [
+       "executive",
+       "suite"
+      ]
+     ],
+     "exclude": []
+    }
+   ]
+  },
+  {
+   "id": "faran",
+   "name": "Hotel Faran",
+   "booking_url": "https://www.booking.com/hotel/pk/faran-karachi.html",
+   "name_keys": [
+    "faran"
+   ],
+   "rooms": [
+    {
+     "id": "standard",
+     "name": "Standard",
+     "keys": [
+      [
+       "standard"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "executive",
+     "name": "Executive",
+     "keys": [
+      [
+       "executive"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "suite",
+     "name": "Suite",
+     "keys": [
+      [
+       "suite"
+      ]
+     ],
+     "exclude": [
+      "family"
+     ]
+    },
+    {
+     "id": "family-suite",
+     "name": "Family Suite",
+     "keys": [
+      [
+       "family"
+      ]
+     ],
+     "exclude": []
+    }
+   ]
+  },
+  {
+   "id": "embassy-inn",
+   "name": "Embassy Inn Hotel",
+   "booking_url": "https://www.booking.com/hotel/pk/embassy-inn.html",
+   "name_keys": [
+    "embassy"
+   ],
+   "rooms": [
+    {
+     "id": "classic",
+     "name": "Classic",
+     "keys": [
+      [
+       "classic"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "superior",
+     "name": "Superior",
+     "keys": [
+      [
+       "superior"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "deluxe",
+     "name": "Deluxe",
+     "keys": [
+      [
+       "deluxe"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ambiance",
+   "name": "Ambiance Boutique Art Hotel Karachi",
+   "booking_url": "https://www.booking.com/hotel/pk/ambiance-boutique-art.html",
+   "name_keys": [
+    "ambiance"
+   ],
+   "rooms": [
+    {
+     "id": "premier",
+     "name": "Premier Room",
+     "keys": [
+      [
+       "premier"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "executive",
+     "name": "Executive Room",
+     "keys": [
+      [
+       "executive"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "junior-suite",
+     "name": "Junior Suite",
+     "keys": [
+      [
+       "junior"
+      ]
+     ],
+     "exclude": []
+    },
+    {
+     "id": "terrace-suite",
+     "name": "Terrace Suite",
+     "keys": [
+      [
+       "terrace"
+      ]
+     ],
+     "exclude": []
+    },
+    {
+     "id": "executive-suite",
+     "name": "Ambiance Executive Suite",
+     "keys": [
+      [
+       "executive",
+       "suite"
+      ]
+     ],
+     "exclude": []
+    }
+   ]
+  },
+  {
+   "id": "sarawan",
+   "name": "Hotel Sarawan",
+   "booking_url": "https://www.booking.com/hotel/pk/sarawan-karachi.html",
+   "name_keys": [
+    "sarawan"
+   ],
+   "rooms": [
+    {
+     "id": "standard",
+     "name": "Standard",
+     "keys": [
+      [
+       "standard"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "deluxe",
+     "name": "Deluxe Room",
+     "keys": [
+      [
+       "deluxe"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "executive",
+     "name": "Executive Room",
+     "keys": [
+      [
+       "executive"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ramada-plaza",
+   "name": "Ramada Plaza Karachi",
+   "booking_url": "https://www.booking.com/hotel/pk/airport-karachi1.html",
+   "name_keys": [
+    "ramada plaza"
+   ],
+   "rooms": [
+    {
+     "id": "business-chalet",
+     "name": "Business Room (Chalet)",
+     "keys": [
+      [
+       "business"
+      ],
+      [
+       "chalet"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "deluxe",
+     "name": "Deluxe Room (Main Building)",
+     "keys": [
+      [
+       "deluxe"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "imperial",
+     "name": "New Imperial Room",
+     "keys": [
+      [
+       "imperial"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "executive",
+     "name": "Executive Room (Main Building)",
+     "keys": [
+      [
+       "executive"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "chalet-suite",
+     "name": "Chalet Suite",
+     "keys": [
+      [
+       "chalet",
+       "suite"
+      ]
+     ],
+     "exclude": []
+    },
+    {
+     "id": "executive-suite",
+     "name": "Executive Suite",
+     "keys": [
+      [
+       "executive",
+       "suite"
+      ]
+     ],
+     "exclude": []
+    }
+   ]
+  },
+  {
+   "id": "mehran",
+   "name": "Hotel Mehran",
+   "booking_url": "https://www.booking.com/hotel/pk/mehran-karachi1.html",
+   "name_keys": [
+    "mehran"
+   ],
+   "rooms": [
+    {
+     "id": "deluxe",
+     "name": "Deluxe Floor",
+     "keys": [
+      [
+       "deluxe"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "executive",
+     "name": "Executive Floor",
+     "keys": [
+      [
+       "executive"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "superior",
+     "name": "Superior Floor",
+     "keys": [
+      [
+       "superior"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "royal-plus",
+     "name": "Royal Plus Floor",
+     "keys": [
+      [
+       "royal"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "premium",
+     "name": "Premium Floor (New)",
+     "keys": [
+      [
+       "premium"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "junior-suite",
+     "name": "Junior Suite",
+     "keys": [
+      [
+       "junior"
+      ]
+     ],
+     "exclude": []
+    },
+    {
+     "id": "executive-suite",
+     "name": "Executive Suite",
+     "keys": [
+      [
+       "executive",
+       "suite"
+      ]
+     ],
+     "exclude": []
+    }
+   ]
+  },
+  {
+   "id": "movenpick",
+   "name": "Mövenpick Hotel Karachi",
+   "booking_url": "https://www.booking.com/hotel/pk/movenpick-karachi.html",
+   "name_keys": [
+    "movenpick",
+    "mövenpick"
+   ],
+   "rooms": [
+    {
+     "id": "classic",
+     "name": "Classic Room",
+     "keys": [
+      [
+       "classic"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "deluxe",
+     "name": "Deluxe Room",
+     "keys": [
+      [
+       "deluxe"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "executive",
+     "name": "Executive Room",
+     "keys": [
+      [
+       "executive"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "premier",
+     "name": "Premier Room",
+     "keys": [
+      [
+       "premier"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "junior-suite",
+     "name": "Junior Suite",
+     "keys": [
+      [
+       "junior"
+      ]
+     ],
+     "exclude": []
+    },
+    {
+     "id": "business-suite",
+     "name": "Business Suite",
+     "keys": [
+      [
+       "business",
+       "suite"
+      ]
+     ],
+     "exclude": []
+    },
+    {
+     "id": "diplomatic-suite",
+     "name": "Diplomatic Suite",
+     "keys": [
+      [
+       "diplomatic"
+      ]
+     ],
+     "exclude": []
+    },
+    {
+     "id": "ambassador-suite",
+     "name": "Ambassador Suite",
+     "keys": [
+      [
+       "ambassador"
+      ]
+     ],
+     "exclude": []
+    },
+    {
+     "id": "presidential-suite",
+     "name": "Presidential Suite",
+     "keys": [
+      [
+       "presidential"
+      ]
+     ],
+     "exclude": []
+    },
+    {
+     "id": "royal-suite",
+     "name": "Royal Suite",
+     "keys": [
+      [
+       "royal"
+      ]
+     ],
+     "exclude": []
+    }
+   ]
+  },
+  {
+   "id": "avari-towers",
+   "name": "Avari Towers Karachi",
+   "booking_url": "https://www.booking.com/hotel/pk/avari-tower-karachi.html",
+   "name_keys": [
+    "avari"
+   ],
+   "rooms": [
+    {
+     "id": "world-traveler",
+     "name": "Avari World Traveler",
+     "keys": [
+      [
+       "world"
+      ],
+      [
+       "traveler"
+      ],
+      [
+       "traveller"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "business-class",
+     "name": "Avari Business Class",
+     "keys": [
+      [
+       "business"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "executive",
+     "name": "Avari Executive",
+     "keys": [
+      [
+       "executive"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "business-class-suite",
+     "name": "Avari Business Class Suite",
+     "keys": [
+      [
+       "business",
+       "suite"
+      ]
+     ],
+     "exclude": []
+    },
+    {
+     "id": "executive-suite",
+     "name": "Avari Executive Suite",
+     "keys": [
+      [
+       "executive",
+       "suite"
+      ]
+     ],
+     "exclude": []
+    },
+    {
+     "id": "residence",
+     "name": "Residence at Avari",
+     "keys": [
+      [
+       "residence"
+      ]
+     ],
+     "exclude": []
+    },
+    {
+     "id": "ambassador-suite",
+     "name": "Ambassador Suite",
+     "keys": [
+      [
+       "ambassador"
+      ]
+     ],
+     "exclude": []
+    },
+    {
+     "id": "penthouse",
+     "name": "Penthouse",
+     "keys": [
+      [
+       "penthouse"
+      ]
+     ],
+     "exclude": []
+    }
+   ]
+  },
+  {
+   "id": "beach-luxury",
+   "name": "Beach Luxury Hotel",
+   "booking_url": "https://www.booking.com/hotel/pk/beach-luxury.html",
+   "name_keys": [
+    "beach luxury"
+   ],
+   "rooms": [
+    {
+     "id": "superior",
+     "name": "Superior",
+     "keys": [
+      [
+       "superior"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "deluxe",
+     "name": "Deluxe",
+     "keys": [
+      [
+       "deluxe"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "executive",
+     "name": "Executive",
+     "keys": [
+      [
+       "executive"
+      ]
+     ],
+     "exclude": [
+      "suite"
+     ]
+    },
+    {
+     "id": "superior-suite",
+     "name": "Superior Suite",
+     "keys": [
+      [
+       "superior",
+       "suite"
+      ]
+     ],
+     "exclude": []
+    },
+    {
+     "id": "executive-suite",
+     "name": "Executive Suite",
+     "keys": [
+      [
+       "executive",
+       "suite"
+      ]
+     ],
+     "exclude": []
+    },
+    {
+     "id": "junior-suite",
+     "name": "Junior Suite",
+     "keys": [
+      [
+       "junior"
+      ]
+     ],
+     "exclude": []
+    },
+    {
+     "id": "presidential-suite",
+     "name": "Presidential Suite",
+     "keys": [
+      [
+       "presidential"
+      ]
+     ],
+     "exclude": []
+    }
+   ]
+  }
+ ]
+}

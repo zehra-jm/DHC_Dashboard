@@ -1,0 +1,6 @@
+debug/
+__pycache__/
+*.pyc
+
+# DHC corporate rates must never be committed
+*contract-rates*.json

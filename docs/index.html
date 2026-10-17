@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Karachi Rate Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&family=Young+Serif&display=swap">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="mast">
+  <div class="wrap">
+    <div class="brand">
+      <div class="key" aria-hidden="true">KR</div>
+      <div>
+        <h1>Karachi Rate Board</h1>
+        <p id="basis">Booking.com rates for 3, 4 and 5 star hotels</p>
+      </div>
+    </div>
+    <div class="mast-right"><nav class="nav" aria-label="Views"><a href="#" data-view="market">Market</a><a href="#dhc" data-view="dhc">DHC rates vs Booking.com</a></nav><div class="stamp" id="stamp"></div></div>
+  </div>
+</header>
+<div class="alert" id="alert" role="status" hidden><div class="wrap"><strong id="alert-title"></strong> <span id="alert-text"></span></div></div>
+<div class="sample" id="sample" hidden><div class="wrap">Sample data. These prices are made up so the board can be previewed. Real Booking.com rates replace them after the first collection run. <button type="button" id="demo-alert">Show the layout-change warning</button></div></div>
+<main id="app" class="wrap"><p>Loading rates…</p></main>
+<footer class="wrap foot" id="foot"></footer>
+<script src="app.js"></script>
+</body>
+</html>
