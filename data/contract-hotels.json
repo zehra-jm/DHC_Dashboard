@@ -65,6 +65,7 @@
   {
    "id": "marriott",
    "name": "Karachi Marriott Hotel",
+   "stars": 5,
    "booking_url": "https://www.booking.com/hotel/pk/karachi-marriott.html",
    "name_keys": [
     "marriott"
@@ -193,6 +194,7 @@
   {
    "id": "excelsior",
    "name": "Hotel Excelsior Karachi",
+   "stars": 4,
    "booking_url": "https://www.booking.com/hotel/pk/excelsior-karachi.html",
    "name_keys": [
     "excelsior"
@@ -254,6 +256,7 @@
   {
    "id": "faran",
    "name": "Hotel Faran",
+   "stars": 3,
    "booking_url": "https://www.booking.com/hotel/pk/faran-karachi.html",
    "name_keys": [
     "faran"
@@ -364,6 +367,7 @@
   {
    "id": "ambiance",
    "name": "Ambiance Boutique Art Hotel Karachi",
+   "stars": 5,
    "booking_url": "https://www.booking.com/hotel/pk/ambiance-boutique-art.html",
    "name_keys": [
     "ambiance"
@@ -437,6 +441,7 @@
   {
    "id": "sarawan",
    "name": "Hotel Sarawan",
+   "stars": 3,
    "booking_url": "https://www.booking.com/hotel/pk/sarawan-karachi.html",
    "name_keys": [
     "sarawan"
@@ -486,6 +491,7 @@
   {
    "id": "ramada-plaza",
    "name": "Ramada Plaza Karachi",
+   "stars": 5,
    "booking_url": "https://www.booking.com/hotel/pk/airport-karachi1.html",
    "name_keys": [
     "ramada plaza"
@@ -677,6 +683,7 @@
   {
    "id": "movenpick",
    "name": "Mövenpick Hotel Karachi",
+   "stars": 5,
    "booking_url": "https://www.booking.com/hotel/pk/movenpick-karachi.html",
    "name_keys": [
     "movenpick",
@@ -813,6 +820,7 @@
   {
    "id": "avari-towers",
    "name": "Avari Towers Karachi",
+   "stars": 5,
    "booking_url": "https://www.booking.com/hotel/pk/avari-tower-karachi.html",
    "name_keys": [
     "avari"

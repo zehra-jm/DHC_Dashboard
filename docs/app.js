@@ -233,7 +233,7 @@
       text = 'Rates below are from ' + when(st.last_ok) + '. ' + (st.alert
         ? 'This has lasted since ' + when(st.since) + ', so the collector needs a change.' + issues
         : 'This usually clears by the next run.');
-    } else if (!s.sample && Date.now() - new Date(s.updated) > 8 * 3600e3) {
+    } else if (!s.sample && Date.now() - new Date(s.updated) > 3 * 3600e3) {
       warn = true;
       title = 'No new rates since ' + when(s.updated) + '.';
       text = 'The scheduled collection may be paused on GitHub. Re-enable it under Actions.';
@@ -396,7 +396,7 @@
     S = s;
     document.getElementById('sample').hidden = !s.sample;
     showAlert(s);
-    document.getElementById('basis').textContent = 'Booking.com rates for 3, 4 and 5 star hotels · 1 room, ' + s.adults + ' adults, 1 night from tomorrow';
+    document.getElementById('basis').textContent = 'Booking.com rates for hotels with DHC rate letters · 1 room, ' + s.adults + ' adults, 1 night from tomorrow';
     document.getElementById('stamp').innerHTML = 'Updated <b>' + fmtDay(s.updated) + ', ' + fmtTime(s.updated) + ' PKT</b><br>Check-in priced: ' + fmtDay(s.checkin + 'T12:00:00+05:00');
     const c = s.compared_to;
     document.getElementById('foot').innerHTML =

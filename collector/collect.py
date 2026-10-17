@@ -1,4 +1,6 @@
-"""Collect one snapshot of Booking.com rates for 3, 4 and 5 star hotels in Karachi.
+"""Collect one snapshot of Booking.com rates for the Karachi hotels with a DHC rate letter
+(listed in data/contract-hotels.json). --all-hotels also reads every 3 to 5 star hotel in the
+Karachi search results.
 
 What is priced: one room for 2 adults, checking in tomorrow (Karachi time) for 1 night,
 in PKR. Every run prices the same kind of stay, so runs can be compared over time.
@@ -8,7 +10,7 @@ worked. The status tells a page-layout change (the collector needs fixing) apart
 bot block (usually clears on its own), and the dashboard shows a warning bar from it.
 On any problem it saves the page HTML and a screenshot under debug/.
 
-Usage: python collector/collect.py [--max-hotels N] [--no-rooms]
+Usage: python collector/collect.py [--all-hotels] [--max-hotels N] [--no-rooms]
 """
 import argparse
 import json
@@ -289,7 +291,7 @@ def add_contract_hotels(page, hotels, checkin, checkout):
             continue
         hid = hotel_id(url)
         if hid not in hotels:
-            hotels[hid] = {"id": hid, "name": name or c["name"], "stars": None, "area": "", "url": url,
+            hotels[hid] = {"id": hid, "name": name or c["name"], "stars": c.get("stars"), "area": "", "url": url,
                            "score": None, "price": None, "room_hint": None, "rooms": []}
         hotels[hid]["contract"] = c["id"]
         found[c["id"]] = hid
@@ -318,6 +320,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--max-hotels", type=int, default=300)
     ap.add_argument("--no-rooms", action="store_true")
+    ap.add_argument("--all-hotels", action="store_true")
     args = ap.parse_args()
 
     now = datetime.now(PKT)
@@ -325,6 +328,7 @@ def main():
     checkout = checkin + timedelta(days=1)
     ci, co = checkin.isoformat(), checkout.isoformat()
     room_problems = {"layout": 0, "blocked": 0}
+    no_table = 0
 
     try:
         with sync_playwright() as p:
@@ -333,12 +337,19 @@ def main():
                                       viewport={"width": 1366, "height": 900})
             ctx.add_init_script("Object.defineProperty(navigator,'webdriver',{get:()=>undefined})")
             page = ctx.new_page()
-            hotels = collect_search(page, ci, co, args.max_hotels)
-            if not hotels:
-                raise Problem("layout", "The search page had cards but none could be read as 3 to 5 star hotels.")
-            print(f"{len(hotels)} hotels found")
+            hotels = {}
+            if args.all_hotels:
+                hotels = collect_search(page, ci, co, args.max_hotels)
+                if not hotels:
+                    raise Problem("layout", "The search page had cards but none could be read as 3 to 5 star hotels.")
+                print(f"{len(hotels)} hotels found")
             contract_map = add_contract_hotels(page, hotels, ci, co)
             print(f"contract hotels: {sum(1 for v in contract_map.values() if v)} of {len(contract_map)} found")
+            if not any(contract_map.values()):
+                save_debug(page, "contracts")
+                if blocked(page, None):
+                    raise Problem("blocked", "Booking.com showed a bot check instead of the hotel pages.")
+                raise Problem("layout", "None of the rate-letter hotels could be found on Booking.com.")
             if not args.no_rooms:
                 for i, h in enumerate(hotels.values(), 1):
                     try:
@@ -348,6 +359,8 @@ def main():
                         prob = None
                     if prob == "layout" and not h["price"] and h.get("contract"):
                         prob = None  # contract hotel outside the search: no search price to expect a table from
+                    if not h["rooms"] and not h["price"]:
+                        no_table += 1
                     if prob:
                         if not any(room_problems.values()):
                             save_debug(page, f"hotel-{h['id']}")
@@ -373,7 +386,9 @@ def main():
     print("saved", out.relative_to(ROOT))
 
     priced = sum(1 for h in hotels.values() if h["price"])
-    if room_problems["layout"] > max(2, priced * 0.4):
+    if not args.no_rooms and not args.all_hotels and len(hotels) >= 4 and no_table > len(hotels) * 0.6:
+        write_status(now, "rooms", f"No room rates could be read on {no_table} of {len(hotels)} hotel pages.")
+    elif room_problems["layout"] > max(2, priced * 0.4):
         write_status(now, "rooms", f"Room tables could not be read on {room_problems['layout']} of {priced} "
                                    "hotel pages. Hotel rates were saved; room rates were not.")
     else:

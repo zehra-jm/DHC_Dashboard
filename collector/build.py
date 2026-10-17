@@ -36,6 +36,8 @@ def load(folder):
     snaps = []
     for f in sorted(folder.glob("*/*.json")):
         s = json.loads(f.read_text(encoding="utf-8"))
+        if "contracts" in s:  # only hotels with a DHC rate letter are shown
+            s["hotels"] = [h for h in s["hotels"] if h.get("contract")]
         s["_t"] = datetime.fromisoformat(s["taken_at"])
         s["_file"] = f
         s["_hotels"] = {h["id"]: h for h in s["hotels"]}
