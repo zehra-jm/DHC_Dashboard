@@ -103,8 +103,13 @@ def with_taxes(price, tax_text):
     t = (tax_text or "").lower()
     if "include" in t:
         return price
-    extra = money(t) if "tax" in t or "charge" in t else None
-    return price + extra if extra is not None else None
+    if "tax" not in t and "charge" not in t:
+        return None
+    # Booking.com shows either "+15% TAX" style percentages or "+PKR 3,105 taxes and charges".
+    pcts = [float(x) for x in re.findall(r"(\d+(?:\.\d+)?)\s*%", t)]
+    rest = re.sub(r"\d+(?:\.\d+)?\s*%", "", t)
+    extra = money(rest) or 0
+    return round(price * (1 + sum(pcts) / 100)) + extra
 
 
 def hotel_id(url):
@@ -229,7 +234,7 @@ def collect_rooms(page, hotel, checkin, checkout):
         cur = best.get(key)
         if cur is None or p < cur["price"]:
             best[key] = {"name": r["name"], "meal": r["meal"], "price": p, "free_cancel": r["cancel"],
-                         "total": with_taxes(p, r["tax_text"])}
+                         "total": with_taxes(p, r["tax_text"]), "tax_text": r["tax_text"][:60]}
     if hotel["price"] and not best:
         return [], "layout"
     return sorted(best.values(), key=lambda r: r["price"]), None

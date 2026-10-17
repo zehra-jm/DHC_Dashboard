@@ -18,7 +18,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -30,7 +31,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -41,7 +43,9 @@
        "royal"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     },
     {
      "id": "deluxe-suite",
@@ -52,7 +56,9 @@
        "suite"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     }
    ]
   },
@@ -73,7 +79,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -85,7 +92,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -97,7 +105,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     }
    ]
@@ -119,9 +128,6 @@
       ],
       [
        "double"
-      ],
-      [
-       "single"
       ]
      ],
      "exclude": [
@@ -140,7 +146,9 @@
        "pantry"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     },
     {
      "id": "executive-floor",
@@ -151,7 +159,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -163,7 +172,9 @@
        "suite"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     },
     {
      "id": "vip-suite",
@@ -173,7 +184,9 @@
        "vip"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     }
    ]
   },
@@ -194,7 +207,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -206,7 +220,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -217,7 +232,9 @@
        "junior"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     },
     {
      "id": "executive-suite",
@@ -228,7 +245,9 @@
        "suite"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     }
    ]
   },
@@ -249,7 +268,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -261,7 +281,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -273,7 +294,8 @@
       ]
      ],
      "exclude": [
-      "family"
+      "family",
+      "single room"
      ]
     },
     {
@@ -284,7 +306,9 @@
        "family"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     }
    ]
   },
@@ -305,7 +329,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -317,7 +342,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -329,7 +355,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     }
    ]
@@ -351,7 +378,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -363,7 +391,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -374,7 +403,9 @@
        "junior"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     },
     {
      "id": "terrace-suite",
@@ -384,7 +415,9 @@
        "terrace"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     },
     {
      "id": "executive-suite",
@@ -395,7 +428,9 @@
        "suite"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     }
    ]
   },
@@ -416,7 +451,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -428,7 +464,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -440,7 +477,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     }
    ]
@@ -465,7 +503,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -477,7 +516,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -489,7 +529,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -501,7 +542,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -513,7 +555,9 @@
        "suite"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     },
     {
      "id": "executive-suite",
@@ -524,7 +568,9 @@
        "suite"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     }
    ]
   },
@@ -545,7 +591,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -557,7 +604,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -569,7 +617,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -581,7 +630,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -593,7 +643,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -604,7 +655,9 @@
        "junior"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     },
     {
      "id": "executive-suite",
@@ -615,7 +668,9 @@
        "suite"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     }
    ]
   },
@@ -637,7 +692,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -649,7 +705,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -661,7 +718,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -673,7 +731,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -684,7 +743,9 @@
        "junior"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     },
     {
      "id": "business-suite",
@@ -695,7 +756,9 @@
        "suite"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     },
     {
      "id": "diplomatic-suite",
@@ -705,7 +768,9 @@
        "diplomatic"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     },
     {
      "id": "ambassador-suite",
@@ -715,7 +780,9 @@
        "ambassador"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     },
     {
      "id": "presidential-suite",
@@ -725,7 +792,9 @@
        "presidential"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     },
     {
      "id": "royal-suite",
@@ -735,7 +804,9 @@
        "royal"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     }
    ]
   },
@@ -762,7 +833,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -774,7 +846,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -786,7 +859,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -798,7 +872,9 @@
        "suite"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     },
     {
      "id": "executive-suite",
@@ -809,7 +885,9 @@
        "suite"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     },
     {
      "id": "residence",
@@ -819,7 +897,9 @@
        "residence"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     },
     {
      "id": "ambassador-suite",
@@ -829,7 +909,9 @@
        "ambassador"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     },
     {
      "id": "penthouse",
@@ -839,7 +921,9 @@
        "penthouse"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     }
    ]
   },
@@ -860,7 +944,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -872,7 +957,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -884,7 +970,8 @@
       ]
      ],
      "exclude": [
-      "suite"
+      "suite",
+      "single room"
      ]
     },
     {
@@ -896,7 +983,9 @@
        "suite"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     },
     {
      "id": "executive-suite",
@@ -907,7 +996,9 @@
        "suite"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     },
     {
      "id": "junior-suite",
@@ -917,7 +1008,9 @@
        "junior"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     },
     {
      "id": "presidential-suite",
@@ -927,7 +1020,9 @@
        "presidential"
       ]
      ],
-     "exclude": []
+     "exclude": [
+      "single room"
+     ]
     }
    ]
   }
