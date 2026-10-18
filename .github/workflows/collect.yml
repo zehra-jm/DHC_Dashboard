@@ -2,7 +2,7 @@ name: Collect rates
 
 on:
   schedule:
-    - cron: "17 * * * *"     # every hour (GitHub may start it a few minutes late)
+    - cron: "17 * * * *"     # every hour; GitHub often skips these, so each run also queues the next (see "next" below)
   workflow_dispatch:
     inputs:
       collect:
@@ -11,6 +11,7 @@ on:
         default: true
 
 permissions:
+  actions: write
   contents: write
   issues: write
   pages: write
@@ -101,3 +102,27 @@ jobs:
       - name: Mark the run as failed if collection failed
         if: steps.collect.outcome == 'failure'
         run: exit 1
+
+  # GitHub's free scheduler drops many hourly runs, so each collection run waits until
+  # the next :17 and starts the following run itself. The cron above restarts the chain
+  # if it ever breaks. Public repositories get Actions minutes free, so the wait costs nothing.
+  next:
+    needs: collect
+    if: always() && (github.event_name == 'schedule' || inputs.collect)
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - name: Wait until the next hour
+        run: |
+          now=$(date -u +%s); t=$(( now - now % 3600 + 17 * 60 ))
+          while [ $t -le $(( now + 300 )) ]; do t=$(( t + 3600 )); done
+          echo "Next run at $(date -u -d @$t +%H:%M) UTC"; sleep $(( t - now ))
+      - name: Start the next collection
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          others=$(gh run list --workflow collect.yml --json databaseId,status \
+            -q "[.[] | select(.databaseId != ${{ github.run_id }} and (.status == \"queued\" or .status == \"in_progress\" or .status == \"waiting\" or .status == \"pending\"))] | length")
+          if [ "$others" -gt 0 ]; then echo "Another run is already queued"; exit 0; fi
+          gh workflow run collect.yml --ref ${{ github.ref_name }} -f collect=true

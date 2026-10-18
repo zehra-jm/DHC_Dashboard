@@ -26,6 +26,7 @@ CONTRACTS = ROOT / "data" / "contract-hotels.json"
 OUT = ROOT / "docs" / "data"
 KEEP_DAYS = 45
 FEED_DAYS = 7
+TAX = 0.15  # Sindh sales tax on hotel rooms
 MIN_MOVE = 0.005  # ignore moves under 0.5% (rounding, currency conversion noise)
 WINDOWS = {"d1": (timedelta(days=1), timedelta(hours=8)),
            "d7": (timedelta(days=7), timedelta(days=1)),
@@ -38,6 +39,11 @@ def load(folder):
         s = json.loads(f.read_text(encoding="utf-8"))
         if "contracts" in s:  # only hotels with a DHC rate letter are shown
             s["hotels"] = [h for h in s["hotels"] if h.get("contract")]
+        for h in s["hotels"]:  # every rate on the dashboard is before tax
+            for r in h.get("rooms", []):
+                r["price"] = net(r)
+            if h.get("rooms"):
+                h["price"] = min(r["price"] for r in h["rooms"])
         s["_t"] = datetime.fromisoformat(s["taken_at"])
         s["_file"] = f
         s["_hotels"] = {h["id"]: h for h in s["hotels"]}
@@ -136,6 +142,14 @@ def feed(snaps):
     return events[:500]
 
 
+def net(r):
+    """Booking.com room price before tax. Booking.com shows Karachi prices with tax excluded;
+    if a price ever says it includes tax, the 15% sales tax is taken back out."""
+    if "include" in (r.get("tax_text") or "").lower():
+        return round(r["price"] / (1 + TAX))
+    return r["price"]
+
+
 def matches(booking_name, room):
     n = booking_name.lower()
     return (any(all(t in n for t in alt) for alt in room["keys"])
@@ -144,14 +158,14 @@ def matches(booking_name, room):
 
 def best_match(hotel, room):
     """Cheapest Booking.com offer for a letter room type, preferring offers with breakfast
-    (every rate letter includes breakfast). Value compared is the price with taxes when known."""
+    (every rate letter includes breakfast). Value compared is the price before tax."""
     cands = [r for r in (hotel or {}).get("rooms", []) if matches(r["name"], room)]
     if not cands:
         return None
     bf = [r for r in cands if r.get("meal") == "breakfast"]
-    pick = min(bf or cands, key=lambda r: r.get("total") or r["price"])
+    pick = min(bf or cands, key=net)
     return {"booking_room": pick["name"], "meal": pick.get("meal"), "price": pick["price"],
-            "total": pick.get("total"), "value": pick.get("total") or pick["price"]}
+            "value": net(pick)}
 
 
 def contract_hotel(snap, cid):

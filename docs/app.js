@@ -204,7 +204,7 @@
         '<div class="dl num"><span class="k">vs yesterday</span><span class="k">vs last week</span><span class="k">vs last month</span>' + delta(h.d1, 'yesterday') + delta(h.d7, 'last week') + delta(h.d30, 'last month') + '</div></div></div>' +
       '<div class="hgrid">' +
         '<section><h2>Lowest rate, last 30 days <span>closing rate each day</span></h2>' + chartHtml(h.history) + '</section>' +
-        '<section><h2>Rooms <span>' + h.rooms.length + ' rates for 2 adults, 1 night</span></h2><div class="scroll"><table><thead><tr><th>Room</th><th>Tomorrow</th><th>vs yesterday</th><th>vs last week</th><th>vs last month</th><th>30 days</th></tr></thead><tbody>' +
+        '<section><h2>Rooms <span>' + h.rooms.length + ' rates for 2 adults, 1 night, before tax</span></h2><div class="scroll"><table><thead><tr><th>Room</th><th>Tomorrow</th><th>vs yesterday</th><th>vs last week</th><th>vs last month</th><th>30 days</th></tr></thead><tbody>' +
           (h.rooms.length ? h.rooms.map(r => '<tr><td class="hname">' + esc(r.name) + '<span class="sub">' + '<span class="tag">' + esc(r.meal === 'breakfast' ? 'Breakfast included' : 'Room only') + '</span>' + (r.free_cancel ? '<span class="tag">Free cancellation</span>' : '') + '</span></td>' +
             '<td>' + pkr(r.price) + '</td><td>' + delta(r.d1, 'yesterday') + '</td><td>' + delta(r.d7, 'last week') + '</td><td>' + delta(r.d30, 'last month') + '</td><td>' + spark(r.trend.map(d => d[1])) + '</td></tr>').join('')
             : '<tr><td colspan="6" class="na">No rooms listed for tomorrow night.</td></tr>') +
@@ -269,22 +269,17 @@
   function compare(rates, hid, rid) {
     const h = rates && rates.hotels[hid], v = h && h.rooms[rid];
     if (!v) return null;
-    const tax = rates.tax_rate, markup = rates.dhc_markup;
     const dbl = v.double || v.single + (h.extra_person || 0);
-    const net = h.tax_included ? dbl / (1 + tax) : dbl;
-    const gross = net * (1 + tax);
-    // DHC website price: corporate + markup on the tax-inclusive cost, rounded up to PKR 100, then tax.
-    const site = Math.ceil(net * (1 + markup * (1 + tax)) / 100) * 100 * (1 + tax);
-    return { basis: h.basis, gross, site, derived: !v.double && !!h.extra_person, taxIncluded: h.tax_included };
+    // Corporate rate before tax: letters that quote tax-inclusive prices have the tax taken out.
+    const corp = h.tax_included ? dbl / (1 + rates.tax_rate) : dbl;
+    return { basis: h.basis, corp, derived: !v.double && !!h.extra_person, taxIncluded: h.tax_included };
   }
 
-  function verdict(vsCorp, vsSite) {
-    if (vsCorp == null) return null;
-    if (vsCorp < 0) return { cls: 'bad', text: 'Booking.com is ' + Math.abs(vsCorp).toFixed(0) + '% below your corporate rate. Ask the hotel to review it.' };
-    if (vsSite < -2) return { cls: 'bad', text: 'Booking.com is ' + Math.abs(vsSite).toFixed(0) + '% cheaper than the DHC website. Re-evaluate the website rate.' };
-    if (vsSite < 5) return { cls: 'watch', text: 'Within 5% of the DHC website price. Watch this room.' };
-    if (vsSite >= 10) return { cls: 'raise', text: 'Booking.com is ' + vsSite.toFixed(0) + '% above DHC rates. Re-evaluate website rates: there is room to raise them.' };
-    return { cls: 'good', text: 'DHC website is ' + vsSite.toFixed(0) + '% cheaper than Booking.com.' };
+  function verdict(vs) {
+    if (vs == null) return null;
+    if (vs < 0) return { cls: 'bad', text: 'Booking.com is ' + Math.abs(vs).toFixed(0) + '% below the corporate rate. Ask the hotel to review it.' };
+    if (vs < 5) return { cls: 'watch', text: 'Booking.com is within 5% of the corporate rate. Watch this room.' };
+    return { cls: 'good', text: 'Booking.com is ' + vs.toFixed(0) + '% above the corporate rate.' };
   }
 
   const pct = v => v == null ? '<span class="na">—</span>' : '<span class="gap ' + (v < 0 ? 'neg' : 'pos') + ' num">' + (v > 0 ? '+' : '') + v.toFixed(1) + '%</span>';
@@ -302,25 +297,24 @@
     const rows = [];
     list.forEach(h => h.rooms.forEach(r => {
       const c = compare(rates, h.id, r.id), b = r.match && r.match.value;
-      const vsCorp = c && b ? (b - c.gross) / c.gross * 100 : null;
-      const vsSite = c && b ? (b - c.site) / c.site * 100 : null;
-      rows.push({ h, r, c, b, vsCorp, vsSite, v: verdict(vsCorp, vsSite) });
+      const vs = c && b ? (b - c.corp) / c.corp * 100 : null;
+      rows.push({ h, r, c, b, vs, v: verdict(vs) });
     }));
     const cmp = rows.filter(x => x.v);
-    const below = cmp.filter(x => x.vsCorp < 0).length, under = cmp.filter(x => x.vsCorp >= 0 && x.vsSite < -2).length;
-    const raise = cmp.filter(x => x.vsSite >= 10).length;
-    const att = cmp.filter(x => x.v.cls === 'bad').sort((a, b) => a.vsSite - b.vsSite);
+    const below = cmp.filter(x => x.vs < 0).length, close = cmp.filter(x => x.v.cls === 'watch').length;
+    const above = cmp.filter(x => x.v.cls === 'good').length;
+    const att = cmp.filter(x => x.v.cls === 'bad').sort((a, b) => a.vs - b.vs);
     const found = list.filter(h => h.found).length;
 
     let html = '<div class="pagehead"><h2>DHC rate letters vs Booking.com</h2><p>Each room type from the hotels\' rate letters, matched to the same room on Booking.com. ' +
-      'Both sides are for 2 adults, 1 night from tomorrow, with 15% tax. Single-occupancy letters add the hotel\'s extra-person charge. ' +
+      'Both sides are for 2 adults, 1 night from tomorrow, before tax. Single-occupancy letters add the hotel\'s extra-person charge. ' +
       'Booking.com uses the cheapest offer with breakfast when there is one, since every letter includes breakfast.</p></div>' + ratesPanel(rates);
     html += '<dl class="strip num">' +
       '<div><dt>Hotels found on Booking.com</dt><dd>' + found + ' of ' + list.length + '<small>' + rows.filter(x => x.b).length + ' of ' + rows.length + ' room types matched</small></dd></div>' +
-      '<div><dt>Below corporate rate</dt><dd>' + (rates ? below : '—') + '<small>Booking.com cheaper than your cost</small></dd></div>' +
-      '<div><dt>Below DHC website</dt><dd>' + (rates ? under : '—') + '<small>re-evaluate website rate</small></dd></div>' +
-      '<div><dt>10%+ above DHC</dt><dd>' + (rates ? raise : '—') + '<small>room to raise website rate</small></dd></div></dl>';
-    if (att.length) html += '<section class="attn"><h2>Needs attention <span>' + att.length + ' room types where Booking.com undercuts DHC</span></h2><ul>' +
+      '<div><dt>Below corporate rate</dt><dd>' + (rates ? below : '—') + '<small>Booking.com cheaper than corporate</small></dd></div>' +
+      '<div><dt>Within 5% of corporate</dt><dd>' + (rates ? close : '—') + '<small>watch these rooms</small></dd></div>' +
+      '<div><dt>Above corporate rate</dt><dd>' + (rates ? above : '—') + '<small>by 5% or more</small></dd></div></dl>';
+    if (att.length) html += '<section class="attn"><h2>Needs attention <span>' + att.length + ' room types where Booking.com is below the corporate rate</span></h2><ul>' +
       att.map(x => '<li class="' + x.v.cls + '"><a href="#dhc-' + esc(x.h.id) + '"><strong>' + esc(x.h.name) + '</strong> · ' + esc(x.r.name) + '</a><span>' + x.v.text + '</span></li>').join('') + '</ul></section>';
     list.forEach(h => {
       const hr = rows.filter(x => x.h === h);
@@ -328,14 +322,13 @@
         (rates && rates.hotels[h.id] ? ' <span>' + esc(rates.hotels[h.id].letter) + '</span>' : '') + '</h2>' +
         (!h.found ? '<p class="na">Not found on Booking.com in the latest run.</p>' :
         h.booking_rooms === 0 ? '<p class="na">Found on Booking.com, but no rooms were on sale for tomorrow night in the latest run.</p>' :
-        '<div class="scroll"><table class="ctable"><thead><tr><th>Room (rate letter)</th><th>Booking.com room</th><th>Corporate + tax</th><th>DHC website</th><th>Booking.com</th><th>vs corporate</th><th>vs DHC website</th><th>vs yesterday</th><th>30 days</th></tr></thead><tbody>' +
-        hr.map(x => '<tr' + (x.v ? ' class="v-' + x.v.cls + '"' : '') + '><td class="hname">' + esc(x.r.name) + (x.c ? '<span class="sub">' + esc(x.c.basis) + (x.c.derived ? ' · single + extra person' : '') + (x.c.taxIncluded ? ' · letter price includes tax' : '') + '</span>' : '') + '</td>' +
-          '<td class="bname">' + (x.r.match ? esc(x.r.match.booking_room) + '<span class="sub">' + (x.r.match.meal === 'breakfast' ? 'Breakfast included' : 'Room only') + (x.r.match.total == null ? ' · taxes not shown' : '') + '</span>' : '<span class="na">No matching room</span>') + '</td>' +
-          '<td>' + (x.c ? '<span class="num">' + n(x.c.gross) + '</span>' : '<span class="na">—</span>') + '</td>' +
-          '<td>' + (x.c ? '<span class="num">' + n(x.c.site) + '</span>' : '<span class="na">—</span>') + '</td>' +
+        '<div class="scroll"><table class="ctable"><thead><tr><th>Room (rate letter)</th><th>Booking.com room</th><th>Corporate (excl. tax)</th><th>Booking.com (excl. tax)</th><th>Booking.com vs corporate</th><th>vs yesterday</th><th>30 days</th></tr></thead><tbody>' +
+        hr.map(x => '<tr' + (x.v ? ' class="v-' + x.v.cls + '"' : '') + '><td class="hname">' + esc(x.r.name) + (x.c ? '<span class="sub">' + esc(x.c.basis) + (x.c.derived ? ' · single + extra person' : '') + (x.c.taxIncluded ? ' · letter price had tax included, shown without' : '') + '</span>' : '') + '</td>' +
+          '<td class="bname">' + (x.r.match ? esc(x.r.match.booking_room) + '<span class="sub">' + (x.r.match.meal === 'breakfast' ? 'Breakfast included' : 'Room only') + '</span>' : '<span class="na">No matching room</span>') + '</td>' +
+          '<td>' + (x.c ? '<span class="num">' + n(x.c.corp) + '</span>' : '<span class="na">—</span>') + '</td>' +
           '<td>' + (x.b ? '<span class="price num">' + n(x.b) + '</span>' : '<span class="na">—</span>') + '</td>' +
-          '<td>' + pct(x.vsCorp) + '</td><td>' + pct(x.vsSite) + '</td><td>' + delta(x.r.d1, 'yesterday') + '</td><td>' + spark(x.r.trend) + '</td></tr>' +
-          (x.v ? '<tr class="insight v-' + x.v.cls + '"><td colspan="9">' + x.v.text + '</td></tr>' : '')).join('') +
+          '<td>' + pct(x.vs) + '</td><td>' + delta(x.r.d1, 'yesterday') + '</td><td>' + spark(x.r.trend) + '</td></tr>' +
+          (x.v ? '<tr class="insight v-' + x.v.cls + '"><td colspan="7">' + x.v.text + '</td></tr>' : '')).join('') +
         '</tbody></table></div>' +
         (h.unmatched.length ? '<p class="unmatched">Booking.com rooms not in the rate letter: ' + h.unmatched.map(esc).join(', ') + '</p>' : '')) +
         '</section>';
@@ -396,11 +389,11 @@
     S = s;
     document.getElementById('sample').hidden = !s.sample;
     showAlert(s);
-    document.getElementById('basis').textContent = 'Booking.com rates for hotels with DHC rate letters · 1 room, ' + s.adults + ' adults, 1 night from tomorrow';
+    document.getElementById('basis').textContent = 'Booking.com rates for hotels with DHC rate letters · 1 room, ' + s.adults + ' adults, 1 night from tomorrow · before tax';
     document.getElementById('stamp').innerHTML = 'Updated <b>' + fmtDay(s.updated) + ', ' + fmtTime(s.updated) + ' PKT</b><br>Check-in priced: ' + fmtDay(s.checkin + 'T12:00:00+05:00');
     const c = s.compared_to;
     document.getElementById('foot').innerHTML =
-      'Rates are the prices Booking.com shows in ' + esc(s.currency) + ' for one room, ' + s.adults + ' adults, checking in the next day for 1 night. ' +
+      'Rates are the prices Booking.com shows in ' + esc(s.currency) + ' for one room, ' + s.adults + ' adults, checking in the next day for 1 night, before tax. ' +
       'Each snapshot prices the next night, so "vs last week" compares today\'s next-night rate with the next-night rate a week ago. ' +
       'Compared with snapshots from ' + ['d1', 'd7', 'd30'].map(k => PERIODS[k] + ': ' + (c[k] ? fmtDay(c[k]) + ' ' + fmtTime(c[k]) : 'not collected yet')).join(', ') + '. ' +
       s.snapshots + ' snapshots kept since ' + fmtDay(s.first) + '.';

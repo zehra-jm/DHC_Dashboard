@@ -61,9 +61,9 @@ python -m http.server -d docs 8000   # then open http://localhost:8000
 The **DHC rates vs Booking.com** view compares every room type in the hotels' rate letters with the same room on Booking.com.
 
 - `data/contract-hotels.json` lists the 13 hotels with rate letters, their Booking.com pages and the room types named in each letter, with the words used to recognise each room on Booking.com. It holds **no rates**.
-- Every run, `collect.py` opens each of these hotels on Booking.com, and `build.py` writes `docs/data/contracts.json`: the matching Booking.com room, its price with taxes for 2 adults (breakfast offer preferred) and its changes.
+- Every run, `collect.py` opens each of these hotels on Booking.com, and `build.py` writes `docs/data/contracts.json`: the matching Booking.com room, its price before tax for 2 adults (breakfast offer preferred) and its changes.
 - The corporate/BRB rates live in a private rate sheet (`dhc-contract-rates.json`) that is **never committed or published**: `.gitignore` blocks it, and Ramada Plaza's agreement forbids showing its rates on any public platform. The dashboard reads it from a file you choose in your own browser and keeps it there.
 
-Comparison rules: both sides are for 2 adults, 1 night, with 15% tax. Single-occupancy letters add the hotel's extra-person charge. The DHC website price is corporate + 10% of the tax-inclusive cost, rounded up to PKR 100, plus tax. Flags: Booking.com below the corporate rate, below the DHC website price, within 5%, or 10%+ above DHC ("re-evaluate website rates").
+Comparison rules: every rate is before tax, for 2 adults and 1 night. Booking.com shows Karachi prices with tax excluded; letters that quote tax-inclusive prices have the 15% tax taken out. Single-occupancy letters add the hotel's extra-person charge. Flags: Booking.com below the corporate rate, within 5% of it, or 5%+ above it.
 
 If a room shows "No matching room", or Booking.com names a room differently, edit its `keys` in `data/contract-hotels.json`: each entry is a list of words that must all appear in the Booking.com room name, and `exclude` lists words that must not.
