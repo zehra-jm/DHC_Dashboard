@@ -10,10 +10,10 @@
   --navy-ink: #F2EBDC;
   --brass: #9C7638;
   --brass-soft: #E8D9B8;
-  --up: #B0402C;
-  --up-soft: #F5DED6;
-  --down: #2C7656;
-  --down-soft: #D8EBDF;
+  --bad: #B0402C;
+  --bad-soft: #F5DED6;
+  --good: #2C7656;
+  --good-soft: #D8EBDF;
   --f-display: "Young Serif", Georgia, "Times New Roman", serif;
   --f-body: "Public Sans", "Segoe UI", system-ui, sans-serif;
 }
@@ -21,14 +21,14 @@
   :root:not([data-theme="light"]) {
     --bg: #0F1524; --surface: #161F35; --ink: #ECE5D5; --muted: #A29D8F; --rule: #29355A;
     --navy: #0A101D; --navy-ink: #ECE5D5; --brass: #D3AE6B; --brass-soft: #3A3220;
-    --up: #EE8670; --up-soft: #3E2220; --down: #67C79C; --down-soft: #17352A;
+    --bad: #EE8670; --bad-soft: #3E2220; --good: #67C79C; --good-soft: #17352A;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #0F1524; --surface: #161F35; --ink: #ECE5D5; --muted: #A29D8F; --rule: #29355A;
   --navy: #0A101D; --navy-ink: #ECE5D5; --brass: #D3AE6B; --brass-soft: #3A3220;
-  --up: #EE8670; --up-soft: #3E2220; --down: #67C79C; --down-soft: #17352A;
+  --bad: #EE8670; --bad-soft: #3E2220; --good: #67C79C; --good-soft: #17352A;
   color-scheme: dark;
 }
 
@@ -52,7 +52,7 @@ a { color: inherit; }
 .sample { background: var(--brass-soft); color: var(--ink); font-size: 13px; }
 .sample .wrap { padding-block: 8px; }
 .sample button { font: inherit; color: inherit; background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; }
-.alert { background: var(--up); color: var(--surface); font-size: 14px; }
+.alert { background: var(--bad); color: var(--surface); font-size: 14px; }
 .alert.warn { background: var(--brass-soft); color: var(--ink); border-bottom: 1px solid var(--brass); }
 .alert .wrap { padding-block: 10px; }
 .alert strong { font-weight: 600; margin-right: 4px; }
@@ -102,8 +102,9 @@ tr.link:hover td { background: color-mix(in srgb, var(--brass-soft) 45%, transpa
 .d { display: inline-flex; flex-direction: column; align-items: flex-end; line-height: 1.2; }
 .d b { font-weight: 600; font-size: 13px; padding: 1px 6px; border-radius: 4px; }
 .d small { font-size: 11px; color: var(--muted); margin-top: 2px; }
-.d.up b { color: var(--up); background: var(--up-soft); }
-.d.down b { color: var(--down); background: var(--down-soft); }
+/* Booking.com rates going up is good for DHC, so rises are green and drops red. */
+.d.up b { color: var(--good); background: var(--good-soft); }
+.d.down b { color: var(--bad); background: var(--bad-soft); }
 .d.flat b { color: var(--muted); }
 .na { color: var(--muted); }
 .spark { display: block; margin-left: auto; }
@@ -173,21 +174,21 @@ tr.link:hover td { background: color-mix(in srgb, var(--brass-soft) 45%, transpa
 .attn li:first-child { border-top: 0; }
 .attn li a { text-decoration: none; min-width: 0; overflow-wrap: anywhere; }
 .attn li span { color: var(--muted); font-size: 13px; }
-.attn li.bad { border-left-color: var(--up); }
+.attn li.bad { border-left-color: var(--bad); }
 .attn li.raise { border-left-color: var(--brass); }
 @media (max-width: 700px) { .attn li { grid-template-columns: minmax(0, 1fr); } }
 .contract h2 span { text-align: right; }
 .ctable td.bname { text-align: left; white-space: normal; min-width: 150px; }
 .ctable th:nth-child(2) { text-align: left; }
 .gap { font-weight: 600; font-size: 13px; }
-.gap.neg { color: var(--up); }
-.gap.pos { color: var(--down); }
+.gap.neg { color: var(--bad); }
+.gap.pos { color: var(--good); }
 tr.insight td { border-top: 0; padding-top: 0; text-align: left; font-size: 12px; white-space: normal; }
-tr.v-bad td:first-child { box-shadow: inset 3px 0 var(--up); }
+tr.v-bad td:first-child { box-shadow: inset 3px 0 var(--bad); }
 tr.v-raise td:first-child { box-shadow: inset 3px 0 var(--brass); }
 tr.v-watch td:first-child { box-shadow: inset 3px 0 var(--rule); }
-tr.v-good td:first-child { box-shadow: inset 3px 0 var(--down); }
-tr.insight.v-bad td { color: var(--up); }
+tr.v-good td:first-child { box-shadow: inset 3px 0 var(--good); }
+tr.insight.v-bad td { color: var(--bad); }
 tr.insight.v-raise td { color: var(--brass); }
 tr.insight.v-good td, tr.insight.v-watch td { color: var(--muted); }
 .unmatched { font-size: 12px; color: var(--muted); margin: 8px 0 0; }
