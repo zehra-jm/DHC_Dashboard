@@ -58,7 +58,7 @@ python -m http.server -d docs 8000   # then open http://localhost:8000
 
 ## DHC rate letters vs Booking.com
 
-The **DHC rates vs Booking.com** view compares every room type in the hotels' rate letters with the same room on Booking.com.
+The **Room by room** view compares every room type in the hotels' rate letters with the same room on Booking.com.
 
 - `data/contract-hotels.json` lists the 13 hotels with rate letters, their Booking.com pages and the room types named in each letter, with the words used to recognise each room on Booking.com. It holds **no rates**.
 - Every run, `collect.py` opens each of these hotels on Booking.com, and `build.py` writes `docs/data/contracts.json`: the matching Booking.com room, its price before tax for 2 adults (breakfast offer preferred) and its changes.
@@ -66,6 +66,6 @@ The **DHC rates vs Booking.com** view compares every room type in the hotels' ra
 
 Comparison rules: every rate is before tax, for 2 adults and 1 night. Booking.com shows Karachi prices with tax excluded; letters that quote tax-inclusive prices have the 15% tax taken out. Single-occupancy letters add the hotel's extra-person charge. Flags: Booking.com below the corporate rate, within 5% of it, or 5%+ above it.
 
-The **Lowest rates** view puts each rate-letter hotel's lowest corporate rate (and lowest rack rate, where the letter gives one) next to its cheapest Booking.com room for 2 adults right now, and the lowest and highest Booking.com rate so far today (Karachi time). Rack rates are in the private rate sheet too.
+The **Lowest rates** view (the landing page) puts each rate-letter hotel's lowest corporate rate (and lowest rack rate, where the letter gives one) next to its cheapest Booking.com room for 2 adults right now, and the lowest and highest Booking.com rate so far today (Karachi time). Rack rates are in the private rate sheet too.
 
 If a room shows "No matching room", or Booking.com names a room differently, edit its `keys` in `data/contract-hotels.json`: each entry is a list of words that must all appear in the Booking.com room name, and `exclude` lists words that must not.
