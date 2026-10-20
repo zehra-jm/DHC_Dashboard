@@ -3,16 +3,17 @@
 (function () {
   const app = document.getElementById('app');
   const PERIODS = { d1: 'yesterday', d7: 'last week', d30: 'last month' };
-  const state = { stars: 'all', q: '', period: 'd1', sort: 'stars', dir: -1 };
+  const state = { stars: 'all', q: '', period: 'd1', sort: 'stars', dir: -1, cmp: 'all' };
   let S = null;
   const hotelCache = {};
 
   try {
     const saved = JSON.parse(localStorage.getItem('krb') || '{}');
     if (saved.period) state.period = saved.period;
+    if (saved.cmp) state.cmp = saved.cmp;
   } catch (e) { /* storage unavailable */ }
   function remember() {
-    try { localStorage.setItem('krb', JSON.stringify({ stars: state.stars, period: state.period })); } catch (e) {}
+    try { localStorage.setItem('krb', JSON.stringify({ stars: state.stars, period: state.period, cmp: state.cmp })); } catch (e) {}
   }
 
   // ---------- data ----------
@@ -281,6 +282,16 @@
     return { cls: 'good', short: 'DHC ' + p + ' cheaper', text: 'DHC is ' + p + ' cheaper than Booking.com.' };
   }
   const pill = v => v ? '<span class="pill ' + v.cls + '">' + v.short + '</span>' : '<span class="na">—</span>';
+  // Difference in PKR between DHC's rate and Booking.com's, said from DHC's side.
+  function diffCell(dhc, bk) {
+    if (dhc == null || bk == null) return '<span class="na">—</span>';
+    const d = Math.round(bk - dhc);
+    if (d === 0) return '<span class="num">same</span>';
+    return '<span class="diff ' + (d > 0 ? 'good' : 'bad') + ' num">' + n(Math.abs(d)) + ' ' + (d > 0 ? 'lower' : 'higher') + '</span>';
+  }
+  // Filter for both comparison pages: all rows, rows where DHC is lower, or rows where DHC is higher.
+  const keep = vs => state.cmp === 'all' || (vs != null && (state.cmp === 'lower' ? vs > 0 : vs < 0));
+  const cmpFilter = () => '<div class="controls">' + seg('cmp', 'Show', [['all', 'All'], ['lower', 'DHC lower'], ['higher', 'DHC higher']], state.cmp) + '</div>';
   const legend = '<p class="legend"><span><span class="pill good">DHC cheaper</span> Booking.com is 5% or more above DHC</span><span><span class="pill watch">About the same</span> within 5%</span><span><span class="pill bad">Booking.com cheaper</span> DHC needs a look</span></p>';
 
   const pct = v => v == null ? '<span class="na">—</span>' : '<span class="gap ' + (v < 0 ? 'neg' : 'pos') + ' num">' + (v > 0 ? '+' : '') + v.toFixed(1) + '%</span>';
@@ -307,23 +318,24 @@
     const att = cmp.filter(x => x.v.cls === 'bad').sort((a, b) => a.vs - b.vs);
     const found = list.filter(h => h.found).length;
 
-    let html = '<div class="pagehead"><h2>Room by room</h2><p>Each room in the hotels\' rate letters next to the same room on Booking.com. 2 adults, 1 night from tomorrow, before tax.</p>' + legend + '</div>' + ratesPanel(rates);
+    let html = '<div class="pagehead"><h2>Room by room</h2><p>Each room in the hotels\' rate letters next to the same room on Booking.com. 2 adults, 1 night from tomorrow, before tax.</p>' + legend + '</div>' + ratesPanel(rates) + cmpFilter();
     html += '<dl class="strip num">' +
       '<div><dt>DHC cheaper</dt><dd>' + (rates ? above : '—') + '<small>of ' + cmp.length + ' rooms compared</small></dd></div>' +
       '<div><dt>About the same</dt><dd>' + (rates ? close : '—') + '<small>within 5%</small></dd></div>' +
       '<div><dt>Booking.com cheaper</dt><dd>' + (rates ? below : '—') + '<small>ask the hotel to review</small></dd></div></dl>';
-    if (att.length) html += '<section class="attn"><h2>Needs a look</h2><ul>' +
+    if (att.length && state.cmp !== 'lower') html += '<section class="attn"><h2>Needs a look</h2><ul>' +
       att.map(x => '<li class="bad"><a href="#dhc-' + esc(x.h.id) + '"><strong>' + esc(x.h.name) + '</strong> · ' + esc(x.r.name.replace(/\s*\(.*\)$/, '')) + '</a><span>' + x.v.text + '</span></li>').join('') + '</ul></section>';
     list.forEach(h => {
-      const hr = rows.filter(x => x.h === h);
+      const hr = rows.filter(x => x.h === h && keep(x.vs));
+      if (state.cmp !== 'all' && !hr.length) return;
       html += '<section class="contract" id="dhc-' + esc(h.id) + '"><h2>' + esc(h.name) + '</h2>' +
         (!h.found ? '<p class="na">Not on Booking.com.</p>' :
         h.booking_rooms === 0 ? '<p class="na">No rooms on sale on Booking.com for tomorrow night.</p>' :
-        '<div class="scroll"><table class="ctable"><thead><tr><th>Room</th><th>DHC rate</th><th>Booking.com</th><th>Who is cheaper</th><th>Booking.com vs yesterday</th></tr></thead><tbody>' +
+        '<div class="scroll"><table class="ctable"><thead><tr><th>Room</th><th>DHC rate</th><th>Booking.com</th><th>DHC vs Booking.com (PKR)</th><th>Who is cheaper</th><th>Booking.com vs yesterday</th></tr></thead><tbody>' +
         hr.map(x => '<tr><td class="hname">' + esc(x.r.name.replace(/\s*\(.*\)$/, '')) + (x.c && x.c.derived ? '<span class="sub">single rate + extra person</span>' : '') + '</td>' +
           '<td>' + (x.c ? '<span class="num">' + n(x.c.corp) + '</span>' : '<span class="na">—</span>') + '</td>' +
           '<td>' + (x.b ? '<span class="price num">' + n(x.b) + '</span><span class="sub">' + esc(x.r.match.booking_room) + '</span>' : '<span class="na">no similar room</span>') + '</td>' +
-          '<td>' + pill(x.v) + '</td><td>' + delta(x.r.d1, 'yesterday') + '</td></tr>').join('') +
+          '<td>' + diffCell(x.c && x.c.corp, x.b) + '</td><td>' + pill(x.v) + '</td><td>' + delta(x.r.d1, 'yesterday') + '</td></tr>').join('') +
         '</tbody></table></div>') +
         '</section>';
     });
@@ -363,18 +375,18 @@
     const lowD = rows.filter(r => r.corp).sort((x, y) => x.corp.v - y.corp.v)[0];
     const lowB = rows.filter(r => r.b && r.b.day_low).sort((x, y) => x.b.day_low.price - y.b.day_low.price)[0];
 
-    let html = '<div class="pagehead"><h2>Lowest rates</h2><p>Each hotel\'s cheapest DHC rate next to its cheapest room on Booking.com today. 2 adults, 1 night from tomorrow, before tax.</p>' + legend + '</div>' + ratesPanel(rates);
+    let html = '<div class="pagehead"><h2>Lowest rates</h2><p>Each hotel\'s cheapest DHC rate next to its cheapest room on Booking.com today. 2 adults, 1 night from tomorrow, before tax.</p>' + legend + '</div>' + ratesPanel(rates) + cmpFilter();
     html += '<dl class="strip num">' +
       '<div><dt>DHC cheaper</dt><dd>' + (rates ? dhcWins + ' of ' + cmp.length : '—') + '<small>hotels</small></dd></div>' +
       '<div><dt>Lowest DHC rate</dt><dd>' + (lowD ? n(lowD.corp.v) : '—') + '<small>' + (lowD ? esc(lowD.c.name) : 'load the rate sheet') + '</small></dd></div>' +
       '<div><dt>Lowest on Booking.com today</dt><dd>' + (lowB ? n(lowB.b.day_low.price) : '—') + '<small>' + (lowB ? esc(lowB.c.name) : '') + '</small></dd></div></dl>';
-    html += '<section><div class="scroll"><table class="ctable lowtable"><thead><tr><th>Hotel</th><th>DHC rate</th><th>Booking.com now</th><th>Who is cheaper</th><th>Booking.com today</th></tr></thead><tbody>' +
-      rows.map(r => '<tr><td class="hname">' + (r.b ? '<a href="#h-' + esc(r.b.id) + '">' + esc(r.c.name) + '</a>' : esc(r.c.name)) + '</td>' +
+    html += '<section><div class="scroll"><table class="ctable lowtable"><thead><tr><th>Hotel</th><th>DHC rate</th><th>Booking.com now</th><th>DHC vs Booking.com (PKR)</th><th>Who is cheaper</th><th>Booking.com today</th></tr></thead><tbody>' +
+      (rows.filter(r => keep(r.vs)).map(r => '<tr><td class="hname">' + (r.b ? '<a href="#h-' + esc(r.b.id) + '">' + esc(r.c.name) + '</a>' : esc(r.c.name)) + '</td>' +
           '<td>' + (r.corp ? '<span class="price num">' + n(r.corp.v) + '</span><span class="sub">' + esc(roomLabel(list, r.c, r.corp.room)) + (r.rack ? ' · rack ' + n(r.rack.v) : '') + '</span>' : '<span class="na">—</span>') + '</td>' +
           '<td>' + (!r.c.found ? '<span class="na">not on Booking.com</span>' : r.now ? '<span class="price num">' + n(r.now) + '</span><span class="sub">' + esc(r.b.low_room ? r.b.low_room.name : '') + '</span>' : '<span class="na">no rooms on sale</span>') + '</td>' +
-          '<td>' + pill(verdict(r.vs)) + '</td>' +
+          '<td>' + diffCell(r.corp && r.corp.v, r.now) + '</td><td>' + pill(verdict(r.vs)) + '</td>' +
           '<td>' + (r.b && r.b.day_low ? '<span class="num">' + n(r.b.day_low.price) + (r.b.day_high && r.b.day_high.price !== r.b.day_low.price ? ' – ' + n(r.b.day_high.price) : '') + '</span><span class="sub">low to high</span>' : '<span class="na">—</span>') + '</td></tr>'
-      ).join('') + '</tbody></table></div></section>';
+      ).join('') || '<tr><td colspan="6" class="na">No hotels match this filter.</td></tr>') + '</tbody></table></div></section>';
     app.innerHTML = '<div class="hgrid">' + html + '</div>';
     window.scrollTo(0, 0);
   }
@@ -418,6 +430,7 @@
   app.addEventListener('click', e => {
     const b = e.target.closest('button');
     if (b && b.dataset.stars) { state.stars = b.dataset.stars; remember(); return renderOverview(); }
+    if (b && b.dataset.cmp) { state.cmp = b.dataset.cmp; remember(); return route(); }
     if (b && b.dataset.period) { state.period = b.dataset.period; remember(); return renderOverview(); }
     if (b && b.dataset.sort) {
       const k = b.dataset.sort;

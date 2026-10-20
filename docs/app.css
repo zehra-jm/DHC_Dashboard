@@ -199,6 +199,9 @@ tr.insight.v-good td, tr.insight.v-watch td { color: var(--muted); }
 .pill.good { color: var(--good); background: var(--good-soft); }
 .pill.bad { color: var(--bad); background: var(--bad-soft); }
 .pill.watch { color: var(--watch); background: var(--watch-soft); }
+.diff { font-weight: 600; font-size: 14px; }
+.diff.good { color: var(--good); }
+.diff.bad { color: var(--bad); }
 .legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; color: var(--muted); margin: 10px 0 0; }
 @media (max-width: 700px) {
   .ctable, .ctable tbody, .ctable tr, .ctable td { display: block; }
