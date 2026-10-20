@@ -59,13 +59,27 @@ jobs:
         run: python collector/build.py
 
       - name: Save snapshot to the repository
+        # A queued run can start from an older commit, so rebuild on top of the latest main
+        # before pushing; a plain rebase would conflict on the generated files and drop the snapshot.
         run: |
           git config user.name "rate-collector"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data docs/data
-          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
-          git commit -m "Rates $(TZ=Asia/Karachi date '+%Y-%m-%d %H:%M') PKT"
-          for i in 1 2 3; do git pull --rebase --quiet && git push && break; sleep 5; done
+          keep=$(mktemp -d)
+          git ls-files --others --exclude-standard data/snapshots | while read f; do install -D "$f" "$keep/$f"; done
+          [ -f data/status.json ] && cp data/status.json "$keep/status.json"
+          for i in 1 2 3 4; do
+            git fetch -q origin "$GITHUB_REF_NAME"
+            git reset -q --hard "origin/$GITHUB_REF_NAME"
+            (cd "$keep" && find data -type f 2>/dev/null) | while read f; do install -D "$keep/$f" "$f"; done
+            [ -f "$keep/status.json" ] && cp "$keep/status.json" data/status.json
+            python collector/build.py
+            git add -A data docs/data
+            if git diff --cached --quiet; then echo "No changes"; exit 0; fi
+            git commit -qm "Rates $(TZ=Asia/Karachi date '+%Y-%m-%d %H:%M') PKT"
+            git push -q origin "HEAD:$GITHUB_REF_NAME" && exit 0
+            sleep $((i * 5))
+          done
+          echo "Could not push the snapshot"; exit 1
 
       - name: Open an issue when the collector needs fixing
         if: steps.collect.outputs.alert == 'true'

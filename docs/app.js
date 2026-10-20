@@ -338,6 +338,58 @@
     if (target) { const el = document.getElementById('dhc-' + target[1]); if (el) el.scrollIntoView(); } else window.scrollTo(0, 0);
   }
 
+  // ---------- Lowest rates: each rate-letter hotel's lowest DHC rate vs its lowest Booking.com rate ----------
+  function dhcLowest(rates, hid) {
+    const h = rates && rates.hotels[hid];
+    if (!h) return null;
+    let corp = null, rack = null;
+    Object.keys(h.rooms).forEach(rid => {
+      const c = compare(rates, hid, rid);
+      if (c && (!corp || c.corp < corp.v)) corp = { v: c.corp, room: rid };
+      const v = h.rooms[rid], rk = v.rack_double || v.rack_single;
+      if (rk && (!rack || rk < rack.v)) rack = { v: rk, room: rid };
+    });
+    return { corp, rack };
+  }
+  const roomLabel = (list, h, rid) => { const r = h && h.rooms.find(x => x.id === rid); return r ? r.name.replace(/\s*\(.*\)$/, '') : rid; };
+  const vsCell = v => v == null ? '<span class="na">—</span>' : '<span class="gap ' + (v < 0 ? 'neg' : 'pos') + ' num">' + (v > 0 ? '+' : '') + v.toFixed(0) + '%</span>';
+
+  async function renderLowest() {
+    const list = await getContracts(), rates = getRates();
+    const byId = {}; S.hotels.forEach(h => { byId[h.id] = h; });
+    const rows = list.map(c => {
+      const b = c.booking_id && byId[c.booking_id], d = dhcLowest(rates, c.id);
+      const corp = d && d.corp, rack = d && d.rack, now = b && b.price;
+      return { c, b, corp, rack, now,
+        vs: corp && now ? (now - corp.v) / corp.v * 100 : null,
+        vsRack: rack && now ? (now - rack.v) / rack.v * 100 : null };
+    });
+    rows.sort((x, y) => (x.corp ? x.corp.v : 1e12) - (y.corp ? y.corp.v : 1e12) || (x.now || 1e12) - (y.now || 1e12));
+    const cmp = rows.filter(r => r.vs != null), dhcWins = cmp.filter(r => r.vs > 0).length;
+    const lowD = rows.filter(r => r.corp).sort((x, y) => x.corp.v - y.corp.v)[0];
+    const lowB = rows.filter(r => r.b && r.b.day_low).sort((x, y) => x.b.day_low.price - y.b.day_low.price)[0];
+
+    let html = '<div class="pagehead"><h2>Lowest rates</h2><p>For each hotel with a DHC rate letter: the lowest corporate rate in the letter, the lowest rack rate where the letter gives one, ' +
+      'and the cheapest Booking.com room right now and so far today. Every rate is for 2 adults, 1 night from tomorrow, before tax. Single rooms are left out on Booking.com.</p></div>' + ratesPanel(rates);
+    html += '<dl class="strip num">' +
+      '<div><dt>DHC cheaper than Booking.com</dt><dd>' + (rates ? dhcWins + ' of ' + cmp.length : '—') + '<small>hotels, lowest rate vs lowest rate</small></dd></div>' +
+      '<div><dt>Lowest DHC rate</dt><dd>' + (lowD ? n(lowD.corp.v) : '—') + '<small>' + (lowD ? esc(lowD.c.name) : 'load the rate sheet') + '</small></dd></div>' +
+      '<div><dt>Lowest Booking.com rate today</dt><dd>' + (lowB ? n(lowB.b.day_low.price) : '—') + '<small>' + (lowB ? esc(lowB.c.name) + ' at ' + fmtTime(lowB.b.day_low.at) : '') + '</small></dd></div></dl>';
+    html += '<section><div class="scroll"><table class="ctable lowtable"><thead><tr><th>Hotel</th><th>DHC lowest (corporate)</th><th>Rack (letter)</th><th>Booking.com now</th><th>Booking.com today</th><th>Booking.com vs DHC</th><th>Booking.com vs rack</th></tr></thead><tbody>' +
+      rows.map(r => {
+        const cls = r.vs == null ? '' : r.vs < 0 ? ' class="v-bad"' : r.vs < 5 ? ' class="v-watch"' : ' class="v-good"';
+        return '<tr' + cls + '><td class="hname">' + (r.b ? '<a href="#h-' + esc(r.b.id) + '">' + esc(r.c.name) + '</a>' : esc(r.c.name)) + '</td>' +
+          '<td>' + (r.corp ? '<span class="price num">' + n(r.corp.v) + '</span><span class="sub">' + esc(roomLabel(list, r.c, r.corp.room)) + '</span>' : '<span class="na">—</span>') + '</td>' +
+          '<td>' + (r.rack ? '<span class="num">' + n(r.rack.v) + '</span><span class="sub">' + esc(roomLabel(list, r.c, r.rack.room)) + '</span>' : '<span class="na">' + (rates ? 'not in letter' : '—') + '</span>') + '</td>' +
+          '<td>' + (!r.c.found ? '<span class="na">not on Booking.com</span>' : r.now ? '<span class="price num">' + n(r.now) + '</span><span class="sub">' + esc(r.b.low_room ? r.b.low_room.name : '') + '</span>' : '<span class="na">no rooms on sale</span>') + '</td>' +
+          '<td>' + (r.b && r.b.day_low ? '<span class="num">' + n(r.b.day_low.price) + '</span><span class="sub">low at ' + fmtTime(r.b.day_low.at) + (r.b.day_high && r.b.day_high.price !== r.b.day_low.price ? ' · high ' + n(r.b.day_high.price) : '') + '</span>' : '<span class="na">—</span>') + '</td>' +
+          '<td>' + vsCell(r.vs) + '</td><td>' + (r.vsRack == null ? '<span class="na">—</span>' : '<span class="num">' + (r.vsRack > 0 ? '+' : '') + r.vsRack.toFixed(0) + '%</span>') + '</td></tr>';
+      }).join('') + '</tbody></table></div>' +
+      '<p class="unmatched">"Booking.com vs DHC" above zero means DHC\'s lowest corporate rate is cheaper than anything on Booking.com for that hotel. "Today" runs from midnight Karachi time, across the hourly collections.</p></section>';
+    app.innerHTML = '<div class="hgrid">' + html + '</div>';
+    window.scrollTo(0, 0);
+  }
+
   app.addEventListener('change', e => {
     if (e.target.id !== 'ratefile' || !e.target.files[0]) return;
     const msg = document.getElementById('ratefile-msg');
@@ -345,13 +397,13 @@
       const r = JSON.parse(t);
       if (r.kind !== 'dhc-contract-rates' || !r.hotels) throw new Error('This is not a DHC rate sheet.');
       try { localStorage.setItem('krb-rates', JSON.stringify(r)); } catch (err) { throw new Error('This browser blocked saving the file.'); }
-      renderContracts();
+      route();
     }).catch(err => { msg.textContent = err.message.startsWith('Unexpected') ? 'That file is not valid JSON.' : err.message; });
   });
 
   function setNav() {
-    const dhc = /^#dhc/.test(location.hash);
-    document.querySelectorAll('.nav a').forEach(a => a.setAttribute('aria-current', (a.dataset.view === 'dhc') === dhc ? 'page' : 'false'));
+    const view = /^#dhc/.test(location.hash) ? 'dhc' : /^#low/.test(location.hash) ? 'low' : 'market';
+    document.querySelectorAll('.nav a').forEach(a => a.setAttribute('aria-current', a.dataset.view === view ? 'page' : 'false'));
   }
 
   // ---------- shell ----------
@@ -359,6 +411,7 @@
     setNav();
     const m = location.hash.match(/^#h-(.+)$/);
     if (/^#dhc/.test(location.hash)) renderContracts();
+    else if (/^#low/.test(location.hash)) renderLowest();
     else if (m) renderHotel(decodeURIComponent(m[1])); else renderOverview();
   }
 
@@ -372,7 +425,7 @@
       state.sort = k;
       return renderOverview();
     }
-    if (b && b.id === 'forget') { try { localStorage.removeItem('krb-rates'); } catch (err) {} return renderContracts(); }
+    if (b && b.id === 'forget') { try { localStorage.removeItem('krb-rates'); } catch (err) {} return route(); }
     const tr = e.target.closest('tr[data-go]');
     if (tr && !e.target.closest('a')) location.hash = 'h-' + tr.dataset.go;
   });

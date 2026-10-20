@@ -42,8 +42,8 @@ def load(folder):
         for h in s["hotels"]:  # every rate on the dashboard is before tax
             for r in h.get("rooms", []):
                 r["price"] = net(r)
-            if h.get("rooms"):
-                h["price"] = min(r["price"] for r in h["rooms"])
+            if h.get("rooms"):  # a hotel's rate is its cheapest room for 2 adults, so single rooms don't count
+                h["price"] = min(r["price"] for r in for_two(h["rooms"]))
         s["_t"] = datetime.fromisoformat(s["taken_at"])
         s["_file"] = f
         s["_hotels"] = {h["id"]: h for h in s["hotels"]}
@@ -142,6 +142,10 @@ def feed(snaps):
     return events[:500]
 
 
+def for_two(rooms):
+    return [r for r in rooms if "single room" not in r["name"].lower()] or rooms
+
+
 def net(r):
     """Booking.com room price before tax. Booking.com shows Karachi prices with tax excluded;
     if a price ever says it includes tax, the 15% sales tax is taken back out."""
@@ -219,6 +223,14 @@ def main():
     for hid, h in latest["_hotels"].items():
         row = {k: h.get(k) for k in ("id", "name", "stars", "area", "url", "score", "price", "room_hint")}
         row["room_count"] = len(h.get("rooms", []))
+        if h.get("rooms"):
+            low = min(for_two(h["rooms"]), key=lambda r: r["price"])
+            row["low_room"] = {"name": low["name"], "meal": low.get("meal")}
+        today = [(s["_hotels"].get(hid, {}).get("price"), s["taken_at"]) for s in snaps
+                 if s["_t"].date() == latest["_t"].date()]
+        today = [t for t in today if t[0]]
+        row["day_low"] = min(today, default=None) and dict(zip(("price", "at"), min(today)))
+        row["day_high"] = max(today, default=None) and dict(zip(("price", "at"), max(today)))
         for k, ref in refs.items():
             row[k] = change(h.get("price"), ref and ref["_hotels"].get(hid, {}).get("price"))
         row["trend"] = [v for _, v in daily(snaps, 30, lambda s: s["_hotels"].get(hid, {}).get("price"))]
