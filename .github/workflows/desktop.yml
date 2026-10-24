@@ -1,0 +1,62 @@
+name: Desktop app
+
+# Builds the desktop app (a window onto the live dashboard) for Windows and Mac and
+# attaches it to the "desktop" release. It holds no rates: the rate sheet is loaded in the app.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["desktop/**", ".github/workflows/desktop.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r desktop/requirements.txt
+      - run: python desktop/make_icon.py
+
+      - name: Build (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          pyinstaller --noconfirm --onefile --windowed --name "DHC-Rate-Board" --icon desktop/icon.ico desktop/app.py
+          Move-Item dist/DHC-Rate-Board.exe DHC-Rate-Board-Windows.exe
+
+      - name: Build (Mac)
+        if: runner.os == 'macOS'
+        run: |
+          pyinstaller --noconfirm --windowed --name "DHC Rate Board" --icon desktop/icon.icns --osx-bundle-identifier com.discounthotels.rateboard desktop/app.py
+          ditto -c -k --keepParent "dist/DHC Rate Board.app" DHC-Rate-Board-Mac.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-${{ runner.os }}
+          path: |
+            DHC-Rate-Board-Windows.exe
+            DHC-Rate-Board-Mac.zip
+          if-no-files-found: error
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+      - name: Attach to the "desktop" release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh release view desktop >/dev/null 2>&1 || gh release create desktop --title "DHC Rate Board desktop app" \
+            --notes "Download DHC-Rate-Board-Windows.exe (Windows) or DHC-Rate-Board-Mac.zip (Mac). The app opens the live dashboard in its own window."
+          gh release upload desktop DHC-Rate-Board-Windows.exe DHC-Rate-Board-Mac.zip --clobber

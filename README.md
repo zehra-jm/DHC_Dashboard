@@ -69,3 +69,7 @@ Comparison rules: every rate is before tax, for 2 adults and 1 night. Booking.co
 The **Lowest rates** view (the landing page) puts each rate-letter hotel's lowest corporate rate (and lowest rack rate, where the letter gives one) next to its cheapest Booking.com room for 2 adults right now, and the lowest and highest Booking.com rate so far today (Karachi time). Rack rates are in the private rate sheet too.
 
 If a room shows "No matching room", or Booking.com names a room differently, edit its `keys` in `data/contract-hotels.json`: each entry is a list of words that must all appear in the Booking.com room name, and `exclude` lists words that must not.
+
+## Desktop app
+
+`desktop/app.py` opens the live dashboard in its own window, with its own saved copy of the rate sheet. The **Desktop app** workflow builds it for Windows (`DHC-Rate-Board-Windows.exe`) and Mac (`DHC-Rate-Board-Mac.zip`) and attaches both to the `desktop` release. The app holds no rates and needs an internet connection; it is not code-signed, so Windows and macOS warn the first time it is opened.
