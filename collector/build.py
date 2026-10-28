@@ -172,6 +172,28 @@ def best_match(hotel, room):
             "value": net(pick)}
 
 
+def site_rooms(snap, site_id):
+    """Discounthotels.pk rooms for one hotel in a snapshot, with the price before tax (the site's include 15%)."""
+    h = ((snap.get("dhc_site") or {}).get(str(site_id)) or {}) if site_id else {}
+    return [dict(r, net=round(r["price"] / (1 + TAX))) for r in h.get("rooms", [])]
+
+
+def site_low(rooms):
+    two = [r for r in rooms if "single" not in r["name"].lower()] or rooms
+    r = min(two, key=lambda r: r["net"], default=None)
+    return r and {"name": r["name"], "net": r["net"]}
+
+
+def site_match(rooms, room):
+    """The Discounthotels.pk room that is the same as a rate-letter room, preferring double-occupancy names."""
+    cands = [r for r in rooms if any(all(t in r["name"].lower() for t in alt) for alt in room["keys"])
+             and not any(t in r["name"].lower() for t in room["exclude"] if t != "single room")]
+    if not cands:
+        return None
+    r = min(cands, key=lambda r: ("double" not in r["name"].lower(), "single" in r["name"].lower(), r["net"]))
+    return {"name": r["name"], "net": r["net"]}
+
+
 def contract_hotel(snap, cid):
     return next((h for h in snap["hotels"] if h.get("contract") == cid), None)
 
@@ -184,10 +206,11 @@ def build_contracts(snaps, refs):
     out = []
     for c in json.loads(CONTRACTS.read_text(encoding="utf-8"))["hotels"]:
         h = contract_hotel(latest, c["id"])
+        srooms = site_rooms(latest, c.get("dhc_site_id"))
         rooms, used = [], set()
         for room in c["rooms"]:
             m = best_match(h, room)
-            row = {"id": room["id"], "name": room["name"], "match": m}
+            row = {"id": room["id"], "name": room["name"], "match": m, "site": site_match(srooms, room)}
             if m:
                 used.add(m["booking_room"])
                 for k, ref in refs.items():
@@ -197,7 +220,9 @@ def build_contracts(snaps, refs):
             rooms.append(row)
         out.append({"id": c["id"], "name": c["name"], "found": h is not None,
                     "booking_id": h and h["id"], "booking_name": h and h["name"], "url": h and h["url"],
-                    "rooms": rooms, "booking_rooms": len((h or {}).get("rooms", [])),
+                    "rooms": rooms, "site_low": min((r["site"] for r in rooms if r["site"]), key=lambda x: x["net"],
+                                                    default=None) or site_low(srooms),
+                    "site_rooms": len(srooms), "booking_rooms": len((h or {}).get("rooms", [])),
                     "unmatched": sorted({r["name"] for r in (h or {}).get("rooms", []) if r["name"] not in used})})
     return out
 

@@ -20,6 +20,7 @@ import sys
 import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+import urllib.request
 from urllib.parse import urlencode, urlparse
 
 from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
@@ -299,6 +300,35 @@ def add_contract_hotels(page, hotels, checkin, checkout):
     return found
 
 
+DHC_API = "https://api.discounthotels.pk/api"
+
+
+def dhc_call(path, body=None):
+    req = urllib.request.Request(DHC_API + path, data=json.dumps(body).encode() if body else None,
+                                 headers={"Content-Type": "application/json", "User-Agent": UA})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return json.load(r)
+
+
+def collect_dhc_site(checkin, checkout):
+    """Discounthotels.pk's own rates for the same stay (2 adults, 1 night), from the site's API.
+    The site's prices include 15% tax. Returns {site hotel id: {name, rooms}} or None if the site fails."""
+    try:
+        out = {}
+        for h in dhc_call("/hotels")["hotels"]:
+            a = dhc_call("/availability", {"hotelId": h["id"], "dateFrom": checkin, "dateTo": checkout,
+                                           "adults": 2, "children": 0})
+            out[str(h["id"])] = {"name": h["name"], "rooms": [
+                {"name": r["name"].strip(), "price": r["pricePerNight"], "available": r.get("availableRooms")}
+                for r in a.get("roomTypes", []) if r.get("pricePerNight")]}
+            time.sleep(0.3)
+        print(f"discounthotels.pk: {len(out)} hotels, {sum(len(v['rooms']) for v in out.values())} room rates")
+        return out
+    except Exception as e:
+        print(f"discounthotels.pk failed: {e}")
+        return None
+
+
 def write_status(now, state, message):
     prev = json.loads(STATUS.read_text()) if STATUS.exists() else {}
     stamp = now.isoformat(timespec="minutes")
@@ -374,10 +404,13 @@ def main():
         write_status(now, e.state, str(e))
         sys.exit(1)
 
+    dhc_site = collect_dhc_site(ci, co)
+
     snap = {
         "taken_at": now.isoformat(timespec="minutes"), "source": "booking.com",
         "checkin": ci, "nights": 1, "adults": 2, "currency": "PKR",
         "contracts": contract_map,
+        "dhc_site": dhc_site,
         "hotels": sorted(hotels.values(), key=lambda h: h["name"]),
     }
     out = SNAP_DIR / now.strftime("%Y-%m-%d") / (now.strftime("%H%M") + ".json")

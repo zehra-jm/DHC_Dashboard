@@ -56,6 +56,10 @@ python collector/build.py
 python -m http.server -d docs 8000   # then open http://localhost:8000
 ```
 
+## Discounthotels.pk vs Booking.com
+
+Every run also reads Discounthotels.pk's own rates for the same stay from the site's public API (`api.discounthotels.pk`), for every hotel mapped by `dhc_site_id` in `data/contract-hotels.json`. The site's prices include 15% tax, so they are shown before tax like everything else. **Lowest rates** and **Room by room** compare these with Booking.com, with a PKR difference column, a DHC lower/higher filter and a lowest/highest price sort.
+
 ## DHC rate letters vs Booking.com
 
 The **Room by room** view compares every room type in the hotels' rate letters with the same room on Booking.com.

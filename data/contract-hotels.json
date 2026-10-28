@@ -4,6 +4,7 @@
   {
    "id": "reserve",
    "name": "The Reserve Hotel",
+   "dhc_site_id": 12,
    "booking_url": "https://www.booking.com/hotel/pk/the-reserve.html",
    "name_keys": [
     "reserve"
@@ -65,6 +66,7 @@
   {
    "id": "marriott",
    "name": "Karachi Marriott Hotel",
+   "dhc_site_id": 8,
    "stars": 5,
    "booking_url": "https://www.booking.com/hotel/pk/karachi-marriott.html",
    "name_keys": [
@@ -115,6 +117,7 @@
   {
    "id": "galaxy",
    "name": "Hotel Galaxy",
+   "dhc_site_id": 11,
    "booking_url": "https://www.booking.com/hotel/pk/one-karachi-karachi3.html",
    "name_keys": [
     "hotel galaxy"
@@ -194,6 +197,7 @@
   {
    "id": "excelsior",
    "name": "Hotel Excelsior Karachi",
+   "dhc_site_id": 13,
    "stars": 4,
    "booking_url": "https://www.booking.com/hotel/pk/excelsior-karachi.html",
    "name_keys": [
@@ -256,6 +260,7 @@
   {
    "id": "faran",
    "name": "Hotel Faran",
+   "dhc_site_id": 15,
    "stars": 3,
    "booking_url": "https://www.booking.com/hotel/pk/faran-karachi.html",
    "name_keys": [
@@ -318,6 +323,7 @@
   {
    "id": "embassy-inn",
    "name": "Embassy Inn Hotel",
+   "dhc_site_id": 16,
    "booking_url": "https://www.booking.com/hotel/pk/embassy-inn.html",
    "name_keys": [
     "embassy"
@@ -367,6 +373,7 @@
   {
    "id": "ambiance",
    "name": "Ambiance Boutique Art Hotel Karachi",
+   "dhc_site_id": 9,
    "stars": 5,
    "booking_url": "https://www.booking.com/hotel/pk/ambiance-boutique-art.html",
    "name_keys": [
@@ -441,6 +448,7 @@
   {
    "id": "sarawan",
    "name": "Hotel Sarawan",
+   "dhc_site_id": 14,
    "stars": 3,
    "booking_url": "https://www.booking.com/hotel/pk/sarawan-karachi.html",
    "name_keys": [
@@ -491,6 +499,7 @@
   {
    "id": "ramada-plaza",
    "name": "Ramada Plaza Karachi",
+   "dhc_site_id": 10,
    "stars": 5,
    "booking_url": "https://www.booking.com/hotel/pk/airport-karachi1.html",
    "name_keys": [
@@ -583,6 +592,7 @@
   {
    "id": "mehran",
    "name": "Hotel Mehran",
+   "dhc_site_id": 6,
    "booking_url": "https://www.booking.com/hotel/pk/mehran-karachi1.html",
    "name_keys": [
     "mehran"
@@ -683,6 +693,7 @@
   {
    "id": "movenpick",
    "name": "Mövenpick Hotel Karachi",
+   "dhc_site_id": 3,
    "stars": 5,
    "booking_url": "https://www.booking.com/hotel/pk/movenpick-karachi.html",
    "name_keys": [
@@ -820,6 +831,7 @@
   {
    "id": "avari-towers",
    "name": "Avari Towers Karachi",
+   "dhc_site_id": 2,
    "stars": 5,
    "booking_url": "https://www.booking.com/hotel/pk/avari-tower-karachi.html",
    "name_keys": [
@@ -938,6 +950,7 @@
   {
    "id": "beach-luxury",
    "name": "Beach Luxury Hotel",
+   "dhc_site_id": 4,
    "booking_url": "https://www.booking.com/hotel/pk/beach-luxury.html",
    "name_keys": [
     "beach luxury"
