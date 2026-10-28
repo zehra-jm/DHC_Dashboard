@@ -1,0 +1,1888 @@
+{
+ "hotels": [
+  {
+   "id": 2,
+   "name": "Avari Towers",
+   "city": "Karachi",
+   "address": "Fatima Jinnah Road, Karachi Cantonment, Karachi, 75530, Pakistan",
+   "stars": 5,
+   "checkIn": "14:00",
+   "checkOut": "12:00",
+   "shortDescription": "An established Karachi hotel with business-class and executive floors, a lounge, pool and gym, and breakfast at the Asia Live restaurant.",
+   "latitude": null,
+   "longitude": null,
+   "phone": "0306-8230101",
+   "email": "info@discounthotels.pk",
+   "imageUrl": "/api/img/hotel/2",
+   "roomTypeIds": [
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+   ]
+  },
+  {
+   "id": 3,
+   "name": "Mövenpick Hotel",
+   "city": "Karachi",
+   "address": "Club Road, Civil Lines, Karachi, Pakistan",
+   "stars": 5,
+   "checkIn": "15:00",
+   "checkOut": "12:00",
+   "shortDescription": "A refreshed city hotel on Club Road with executive-floor lounge access, an on-site health club and daily buffet breakfast.",
+   "latitude": null,
+   "longitude": null,
+   "phone": "03068230101",
+   "email": "info@discounthotels.pk",
+   "imageUrl": "/api/img/hotel/3",
+   "roomTypeIds": [
+    21,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+   ]
+  },
+  {
+   "id": 4,
+   "name": "Beach Luxury",
+   "city": "Karachi",
+   "address": "Moulvi Tamizuddin Khan Road, Lalazar, Karachi",
+   "stars": 5,
+   "checkIn": "14:00",
+   "checkOut": "12:00",
+   "shortDescription": "A Karachi hotel with Superior to Presidential categories, breakfast at the 007 restaurant, pool and gym access, and airport shuttle.",
+   "latitude": null,
+   "longitude": null,
+   "phone": "03068230101",
+   "email": "info@discounthotels.pk",
+   "imageUrl": "/api/img/hotel/4",
+   "roomTypeIds": [
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38
+   ]
+  },
+  {
+   "id": 6,
+   "name": "Hotel Mehran",
+   "city": "Karachi",
+   "address": "Main Shahrah-e-Faisal, Karachi Cantonment / Karachi Lines, Karachi, Sindh, Pakistan",
+   "stars": 5,
+   "checkIn": "14:00",
+   "checkOut": "12:00",
+   "shortDescription": "A long-established Shahrah-e-Faisal hotel with 190 rooms and suites, a newly renovated Premium\nFloor, buffet dining and gym access.",
+   "latitude": null,
+   "longitude": null,
+   "phone": "03068230101",
+   "email": "info@discounthotels.pk",
+   "imageUrl": "/api/img/hotel/6",
+   "roomTypeIds": [
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45
+   ]
+  },
+  {
+   "id": 8,
+   "name": "Marriott Hotel",
+   "city": "Karachi",
+   "address": "9 Abdullah Haroon Road, Karachi, Pakistan",
+   "stars": 5,
+   "checkIn": "14:00",
+   "checkOut": "12:00",
+   "shortDescription": "Karachi Marriott Hotel is a luxury five-star hotel in central Karachi, offering elegant accommodation, fine dining, business facilities, a fitness center, swimming pool, and premium hospitality for business and leisure travelers.",
+   "latitude": null,
+   "longitude": null,
+   "phone": "03068230101",
+   "email": "info@discounthotels.pk",
+   "imageUrl": "/api/img/hotel/8",
+   "roomTypeIds": [
+    49,
+    50,
+    51
+   ]
+  },
+  {
+   "id": 9,
+   "name": "Ambiance Hotel",
+   "city": "Karachi",
+   "address": "F-177, Block 5, Clifton, Karachi, Sindh, Pakistan",
+   "stars": 5,
+   "checkIn": "14:00",
+   "checkOut": "12:00",
+   "shortDescription": "A stylish boutique art hotel in Clifton, Karachi, offering contemporary rooms, complimentary breakfast, free Wi-Fi, and a welcoming atmosphere for business and leisure travelers.",
+   "latitude": null,
+   "longitude": null,
+   "phone": "03068230101",
+   "email": "info@discounthotels.pk",
+   "imageUrl": "/api/img/hotel/9",
+   "roomTypeIds": [
+    52,
+    53,
+    54,
+    55,
+    56
+   ]
+  },
+  {
+   "id": 10,
+   "name": "Ramada Airport",
+   "city": "Karachi",
+   "address": "Star Avenue, Terminal No. 1, Jinnah International Airport, Faisal Cantonment, Karachi, Sindh, Pakistan",
+   "stars": 5,
+   "checkIn": "14:00",
+   "checkOut": "12:00",
+   "shortDescription": "Ramada Plaza by Wyndham Karachi Airport Hotel is a luxury airport hotel in Karachi, Pakistan, offering comfortable rooms, multiple restaurants, an outdoor swimming pool, fitness facilities, and airport transfer services for business and leisure travelers.",
+   "latitude": null,
+   "longitude": null,
+   "phone": "03068230101",
+   "email": "info@discounthotels.pk",
+   "imageUrl": "/api/img/hotel/10",
+   "roomTypeIds": [
+    79,
+    80,
+    81,
+    82,
+    83,
+    84
+   ]
+  },
+  {
+   "id": 11,
+   "name": "Hotel Galaxy",
+   "city": "Karachi",
+   "address": "Plot No. 164, B.C.H.S., Shahrah-e-Faisal, Darwaish Colony, Karachi, Sindh, Pakistan",
+   "stars": 3,
+   "checkIn": "14:00",
+   "checkOut": "12:00",
+   "shortDescription": "Hotel Galaxy Karachi offers comfortable accommodation on Shahrah-e-Faisal, with dining, modern guest rooms, fitness facilities, and convenient access to Karachi's business districts and Jinnah International Airport.",
+   "latitude": null,
+   "longitude": null,
+   "phone": "03068230101",
+   "email": "info@discounthotels.pk",
+   "imageUrl": "/api/img/hotel/11",
+   "roomTypeIds": [
+    64,
+    65,
+    66,
+    68,
+    72,
+    73
+   ]
+  },
+  {
+   "id": 12,
+   "name": "Reserve Hotel",
+   "city": "Karachi",
+   "address": "13C, Creek Lane 4, Ittehad Commercial Area, DHA Phase 6, Karachi, Pakistan",
+   "stars": 3,
+   "checkIn": "14:00",
+   "checkOut": "12:00",
+   "shortDescription": "The Reserve Hotel is a boutique hotel in DHA Phase 6, Karachi, offering comfortable accommodation, complimentary breakfast, free Wi-Fi, parking, and convenient access to dining and local attractions",
+   "latitude": null,
+   "longitude": null,
+   "phone": "03068230101",
+   "email": "info@discounthotels.pk",
+   "imageUrl": "/api/img/hotel/12",
+   "roomTypeIds": [
+    85,
+    86,
+    87,
+    88,
+    89,
+    90
+   ]
+  },
+  {
+   "id": 13,
+   "name": "HOTEL EXCELSIOR",
+   "city": "Karachi",
+   "address": "Plot SB-21, Sarwar Shaheed Road, opposite Atrium Mall, Saddar Town, Karachi, Sindh, Pakistan",
+   "stars": 4,
+   "checkIn": "14:00",
+   "checkOut": "12:00",
+   "shortDescription": "Hotel Excelsior Karachi is a modern hotel in Saddar, opposite Atrium Mall, offering comfortable accommodation, on-site dining, complimentary breakfast options, free Wi-Fi, and convenient access to Karachi's shopping and business districts.",
+   "latitude": null,
+   "longitude": null,
+   "phone": "03068230101",
+   "email": "info@discounthotels.pk",
+   "imageUrl": "/api/img/hotel/13",
+   "roomTypeIds": [
+    57,
+    58,
+    59,
+    60
+   ]
+  },
+  {
+   "id": 14,
+   "name": "HOTEL SARAWAN",
+   "city": "Karachi",
+   "address": "Raja Ghazanfar Ali Road, near Zainab Market, Saddar, Karachi, Sindh, Pakistan",
+   "stars": 3,
+   "checkIn": "12:00",
+   "checkOut": "12:00",
+   "shortDescription": "Hotel Sarawan is a centrally located hotel in Saddar, Karachi, offering comfortable rooms, complimentary breakfast, free Wi-Fi, on-site dining, a banquet hall, and airport transfer services.",
+   "latitude": null,
+   "longitude": null,
+   "phone": "03068230101",
+   "email": "info@discounthotels.pk",
+   "imageUrl": "/api/img/hotel/14",
+   "roomTypeIds": [
+    61,
+    62,
+    63
+   ]
+  },
+  {
+   "id": 15,
+   "name": "Faran Hotel",
+   "city": "Karachi",
+   "address": "8-A, Shahrah-e-Faisal, PECHS Extension, Block 6, Nursery, Karachi, Sindh, Pakistan",
+   "stars": 3,
+   "checkIn": "14:00",
+   "checkOut": "12:00",
+   "shortDescription": "Hotel Faran Karachi is a centrally located hotel on Shahrah-e-Faisal, offering family rooms, on-site dining, buffet breakfast, free Wi-Fi, room service, and parking for business and leisure travelers.",
+   "latitude": null,
+   "longitude": null,
+   "phone": "03068230101",
+   "email": "info@discounthotels.pk",
+   "imageUrl": "/api/img/hotel/15",
+   "roomTypeIds": [
+    74,
+    75,
+    76,
+    77,
+    78
+   ]
+  },
+  {
+   "id": 16,
+   "name": "Embassy Inn",
+   "city": "Karachi",
+   "address": "100-B, Main Shahrah-e-Faisal, Sindhi Muslim Cooperative Housing Society (SMCHS), Block B, Karachi",
+   "stars": 4,
+   "checkIn": "14:00",
+   "checkOut": "12:00",
+   "shortDescription": "A Karachi business and leisure hotel with Classic, Superior and Deluxe rooms, buffet breakfast, airport\npickup and a gym.",
+   "latitude": null,
+   "longitude": null,
+   "phone": "03068230101",
+   "email": "info@discounthotels.pk",
+   "imageUrl": "/api/img/hotel/16",
+   "roomTypeIds": [
+    91,
+    92,
+    93,
+    94,
+    95,
+    96
+   ]
+  },
+  {
+   "id": 17,
+   "name": "Ramada Creek DHA",
+   "city": "Karachi",
+   "address": "Zulfiqar Street 1, DHA Phase VIII, Karachi, Pakistan",
+   "stars": 5,
+   "checkIn": "14:00",
+   "checkOut": "12:00",
+   "shortDescription": "Offering panoramic views of the sea, Ramada by Wyndham Karachi Creek is set in Karachi. Guests can enjoy the on-site restaurant. Each room at this hotel is air conditioned and features a TV with satellite channels. Some rooms feature a seating area where you can relax. Rooms are fitted with a private bathroom. Extras include bathrobes, slippers and free toiletries.",
+   "latitude": null,
+   "longitude": null,
+   "phone": "03068230101",
+   "email": "info@discounthotels.pk",
+   "imageUrl": "/api/img/hotel/17",
+   "roomTypeIds": [
+    97,
+    98,
+    99,
+    100
+   ]
+  }
+ ],
+ "avail": {
+  "2-1": {
+   "hotelId": 2,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 12,
+     "name": "Avari World Traveler",
+     "availableRooms": 53,
+     "imageUrl": "/api/img/room/12",
+     "totalPrice": 50760,
+     "pricePerNight": 50760,
+     "rackPricePerNight": 63450,
+     "rackTotalPrice": 63450
+    },
+    {
+     "roomTypeId": 13,
+     "name": "Avari Business Class",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/13",
+     "totalPrice": 54810,
+     "pricePerNight": 54810,
+     "rackPricePerNight": 68513,
+     "rackTotalPrice": 68513
+    },
+    {
+     "roomTypeId": 14,
+     "name": "Avari Executive",
+     "availableRooms": 14,
+     "imageUrl": "/api/img/room/14",
+     "totalPrice": 61560,
+     "pricePerNight": 61560,
+     "rackPricePerNight": 76950,
+     "rackTotalPrice": 76950
+    },
+    {
+     "roomTypeId": 15,
+     "name": "Avari Business Class Suite",
+     "availableRooms": 12,
+     "imageUrl": "/api/img/room/15",
+     "totalPrice": 76410,
+     "pricePerNight": 76410,
+     "rackPricePerNight": 95513,
+     "rackTotalPrice": 95513
+    },
+    {
+     "roomTypeId": 16,
+     "name": "Avari Executive Suite",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/16",
+     "totalPrice": 79110,
+     "pricePerNight": 79110,
+     "rackPricePerNight": 98888,
+     "rackTotalPrice": 98888
+    },
+    {
+     "roomTypeId": 17,
+     "name": "Residence at Avari",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/17",
+     "totalPrice": 80460,
+     "pricePerNight": 80460,
+     "rackPricePerNight": 100575,
+     "rackTotalPrice": 100575
+    },
+    {
+     "roomTypeId": 18,
+     "name": "Ambassador Suite",
+     "availableRooms": 16,
+     "imageUrl": "/api/img/room/18",
+     "totalPrice": 181710,
+     "pricePerNight": 181710,
+     "rackPricePerNight": 227138,
+     "rackTotalPrice": 227138
+    },
+    {
+     "roomTypeId": 19,
+     "name": "Penthouse",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/19",
+     "totalPrice": 242460,
+     "pricePerNight": 242460,
+     "rackPricePerNight": 303075,
+     "rackTotalPrice": 303075
+    }
+   ]
+  },
+  "2-2": {
+   "hotelId": 2,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 12,
+     "name": "Avari World Traveler",
+     "availableRooms": 53,
+     "imageUrl": "/api/img/room/12",
+     "totalPrice": 54210,
+     "pricePerNight": 54210,
+     "rackPricePerNight": 67763,
+     "rackTotalPrice": 67763
+    },
+    {
+     "roomTypeId": 13,
+     "name": "Avari Business Class",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/13",
+     "totalPrice": 58260,
+     "pricePerNight": 58260,
+     "rackPricePerNight": 72825,
+     "rackTotalPrice": 72825
+    },
+    {
+     "roomTypeId": 14,
+     "name": "Avari Executive",
+     "availableRooms": 14,
+     "imageUrl": "/api/img/room/14",
+     "totalPrice": 65010,
+     "pricePerNight": 65010,
+     "rackPricePerNight": 81263,
+     "rackTotalPrice": 81263
+    },
+    {
+     "roomTypeId": 15,
+     "name": "Avari Business Class Suite",
+     "availableRooms": 12,
+     "imageUrl": "/api/img/room/15",
+     "totalPrice": 79860,
+     "pricePerNight": 79860,
+     "rackPricePerNight": 99825,
+     "rackTotalPrice": 99825
+    },
+    {
+     "roomTypeId": 16,
+     "name": "Avari Executive Suite",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/16",
+     "totalPrice": 82560,
+     "pricePerNight": 82560,
+     "rackPricePerNight": 103200,
+     "rackTotalPrice": 103200
+    },
+    {
+     "roomTypeId": 17,
+     "name": "Residence at Avari",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/17",
+     "totalPrice": 83910,
+     "pricePerNight": 83910,
+     "rackPricePerNight": 104888,
+     "rackTotalPrice": 104888
+    },
+    {
+     "roomTypeId": 18,
+     "name": "Ambassador Suite",
+     "availableRooms": 16,
+     "imageUrl": "/api/img/room/18",
+     "totalPrice": 185160,
+     "pricePerNight": 185160,
+     "rackPricePerNight": 231450,
+     "rackTotalPrice": 231450
+    },
+    {
+     "roomTypeId": 19,
+     "name": "Penthouse",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/19",
+     "totalPrice": 245910,
+     "pricePerNight": 245910,
+     "rackPricePerNight": 307388,
+     "rackTotalPrice": 307388
+    }
+   ]
+  },
+  "3-1": {
+   "hotelId": 3,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 21,
+     "name": "Classic Room",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/21",
+     "totalPrice": 55625,
+     "pricePerNight": 55625
+    },
+    {
+     "roomTypeId": 23,
+     "name": "Executive Room",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/23",
+     "totalPrice": 65000,
+     "pricePerNight": 65000
+    },
+    {
+     "roomTypeId": 24,
+     "name": "Premier",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/24",
+     "totalPrice": 68750,
+     "pricePerNight": 68750
+    },
+    {
+     "roomTypeId": 25,
+     "name": "Deluxe Room",
+     "availableRooms": 6,
+     "imageUrl": "/api/img/room/25",
+     "totalPrice": 60000,
+     "pricePerNight": 60000
+    },
+    {
+     "roomTypeId": 26,
+     "name": "Junior Suite",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/26",
+     "totalPrice": 75000,
+     "pricePerNight": 75000
+    },
+    {
+     "roomTypeId": 27,
+     "name": "Business Suite",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/27",
+     "totalPrice": 100000,
+     "pricePerNight": 100000
+    },
+    {
+     "roomTypeId": 28,
+     "name": "Diplomatic Suite",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/28",
+     "totalPrice": 112500,
+     "pricePerNight": 112500
+    },
+    {
+     "roomTypeId": 29,
+     "name": "Ambassador Suite",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/29",
+     "totalPrice": 175000,
+     "pricePerNight": 175000
+    },
+    {
+     "roomTypeId": 30,
+     "name": "Presidential Suite",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/30",
+     "totalPrice": 175000,
+     "pricePerNight": 175000
+    },
+    {
+     "roomTypeId": 31,
+     "name": "Royal Suite",
+     "availableRooms": 6,
+     "imageUrl": "/api/img/room/31",
+     "totalPrice": 281250,
+     "pricePerNight": 281250
+    }
+   ]
+  },
+  "3-2": {
+   "hotelId": 3,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 21,
+     "name": "Classic Room",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/21",
+     "totalPrice": 59075,
+     "pricePerNight": 59075
+    },
+    {
+     "roomTypeId": 23,
+     "name": "Executive Room",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/23",
+     "totalPrice": 68450,
+     "pricePerNight": 68450
+    },
+    {
+     "roomTypeId": 24,
+     "name": "Premier",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/24",
+     "totalPrice": 72200,
+     "pricePerNight": 72200
+    },
+    {
+     "roomTypeId": 25,
+     "name": "Deluxe Room",
+     "availableRooms": 6,
+     "imageUrl": "/api/img/room/25",
+     "totalPrice": 63450,
+     "pricePerNight": 63450
+    },
+    {
+     "roomTypeId": 26,
+     "name": "Junior Suite",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/26",
+     "totalPrice": 78450,
+     "pricePerNight": 78450
+    },
+    {
+     "roomTypeId": 27,
+     "name": "Business Suite",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/27",
+     "totalPrice": 103450,
+     "pricePerNight": 103450
+    },
+    {
+     "roomTypeId": 28,
+     "name": "Diplomatic Suite",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/28",
+     "totalPrice": 115950,
+     "pricePerNight": 115950
+    },
+    {
+     "roomTypeId": 29,
+     "name": "Ambassador Suite",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/29",
+     "totalPrice": 178450,
+     "pricePerNight": 178450
+    },
+    {
+     "roomTypeId": 30,
+     "name": "Presidential Suite",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/30",
+     "totalPrice": 178450,
+     "pricePerNight": 178450
+    },
+    {
+     "roomTypeId": 31,
+     "name": "Royal Suite",
+     "availableRooms": 6,
+     "imageUrl": "/api/img/room/31",
+     "totalPrice": 284700,
+     "pricePerNight": 284700
+    }
+   ]
+  },
+  "4-1": {
+   "hotelId": 4,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 32,
+     "name": "Superior Room",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/32",
+     "totalPrice": 33750,
+     "pricePerNight": 33750
+    },
+    {
+     "roomTypeId": 33,
+     "name": "Deluxe Room",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/33",
+     "totalPrice": 36875,
+     "pricePerNight": 36875
+    },
+    {
+     "roomTypeId": 34,
+     "name": "Executive Room",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/34",
+     "totalPrice": 41250,
+     "pricePerNight": 41250
+    },
+    {
+     "roomTypeId": 35,
+     "name": "Superior Suite",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/35",
+     "totalPrice": 45625,
+     "pricePerNight": 45625
+    },
+    {
+     "roomTypeId": 36,
+     "name": "Executive Suite",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/36",
+     "totalPrice": 55000,
+     "pricePerNight": 55000
+    },
+    {
+     "roomTypeId": 37,
+     "name": "Junior Suite",
+     "availableRooms": 6,
+     "imageUrl": "/api/img/room/37",
+     "totalPrice": 64375,
+     "pricePerNight": 64375
+    },
+    {
+     "roomTypeId": 38,
+     "name": "Presidential Suite",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/38",
+     "totalPrice": 73750,
+     "pricePerNight": 73750
+    }
+   ]
+  },
+  "4-2": {
+   "hotelId": 4,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 32,
+     "name": "Superior Room",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/32",
+     "totalPrice": 37200,
+     "pricePerNight": 37200
+    },
+    {
+     "roomTypeId": 33,
+     "name": "Deluxe Room",
+     "availableRooms": 11,
+     "imageUrl": "/api/img/room/33",
+     "totalPrice": 40325,
+     "pricePerNight": 40325
+    },
+    {
+     "roomTypeId": 34,
+     "name": "Executive Room",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/34",
+     "totalPrice": 44700,
+     "pricePerNight": 44700
+    },
+    {
+     "roomTypeId": 35,
+     "name": "Superior Suite",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/35",
+     "totalPrice": 49075,
+     "pricePerNight": 49075
+    },
+    {
+     "roomTypeId": 36,
+     "name": "Executive Suite",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/36",
+     "totalPrice": 58450,
+     "pricePerNight": 58450
+    },
+    {
+     "roomTypeId": 37,
+     "name": "Junior Suite",
+     "availableRooms": 6,
+     "imageUrl": "/api/img/room/37",
+     "totalPrice": 67825,
+     "pricePerNight": 67825
+    },
+    {
+     "roomTypeId": 38,
+     "name": "Presidential Suite",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/38",
+     "totalPrice": 77200,
+     "pricePerNight": 77200
+    }
+   ]
+  },
+  "6-1": {
+   "hotelId": 6,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 39,
+     "name": "Deluxe Floor Room",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/39",
+     "totalPrice": 25625,
+     "pricePerNight": 25625
+    },
+    {
+     "roomTypeId": 40,
+     "name": "Executive Floor Room",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/40",
+     "totalPrice": 28125,
+     "pricePerNight": 28125
+    },
+    {
+     "roomTypeId": 41,
+     "name": "Superior Floor Room",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/41",
+     "totalPrice": 29375,
+     "pricePerNight": 29375
+    },
+    {
+     "roomTypeId": 42,
+     "name": "Royal Plus Floor Room",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/42",
+     "totalPrice": 31875,
+     "pricePerNight": 31875
+    },
+    {
+     "roomTypeId": 43,
+     "name": "Premium Floor Room",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/43",
+     "totalPrice": 33125,
+     "pricePerNight": 33125
+    },
+    {
+     "roomTypeId": 44,
+     "name": "Junior Suite",
+     "availableRooms": 6,
+     "imageUrl": "/api/img/room/44",
+     "totalPrice": 50000,
+     "pricePerNight": 50000
+    },
+    {
+     "roomTypeId": 45,
+     "name": "Executive Suite",
+     "availableRooms": 13,
+     "imageUrl": "/api/img/room/45",
+     "totalPrice": 62500,
+     "pricePerNight": 62500
+    }
+   ]
+  },
+  "6-2": {
+   "hotelId": 6,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 39,
+     "name": "Deluxe Floor Room",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/39",
+     "totalPrice": 29075,
+     "pricePerNight": 29075
+    },
+    {
+     "roomTypeId": 40,
+     "name": "Executive Floor Room",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/40",
+     "totalPrice": 31575,
+     "pricePerNight": 31575
+    },
+    {
+     "roomTypeId": 41,
+     "name": "Superior Floor Room",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/41",
+     "totalPrice": 32825,
+     "pricePerNight": 32825
+    },
+    {
+     "roomTypeId": 42,
+     "name": "Royal Plus Floor Room",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/42",
+     "totalPrice": 35325,
+     "pricePerNight": 35325
+    },
+    {
+     "roomTypeId": 43,
+     "name": "Premium Floor Room",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/43",
+     "totalPrice": 36575,
+     "pricePerNight": 36575
+    },
+    {
+     "roomTypeId": 44,
+     "name": "Junior Suite",
+     "availableRooms": 6,
+     "imageUrl": "/api/img/room/44",
+     "totalPrice": 53450,
+     "pricePerNight": 53450
+    },
+    {
+     "roomTypeId": 45,
+     "name": "Executive Suite",
+     "availableRooms": 13,
+     "imageUrl": "/api/img/room/45",
+     "totalPrice": 65950,
+     "pricePerNight": 65950
+    }
+   ]
+  },
+  "8-1": {
+   "hotelId": 8,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 49,
+     "name": "Deluxe Room",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/49",
+     "totalPrice": 47500,
+     "pricePerNight": 47500
+    },
+    {
+     "roomTypeId": 50,
+     "name": "Superior Room",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/50",
+     "totalPrice": 51250,
+     "pricePerNight": 51250
+    },
+    {
+     "roomTypeId": 51,
+     "name": "Executive Room",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/51",
+     "totalPrice": 60500,
+     "pricePerNight": 60500
+    }
+   ]
+  },
+  "8-2": {
+   "hotelId": 8,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 49,
+     "name": "Deluxe Room",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/49",
+     "totalPrice": 50950,
+     "pricePerNight": 50950
+    },
+    {
+     "roomTypeId": 50,
+     "name": "Superior Room",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/50",
+     "totalPrice": 54700,
+     "pricePerNight": 54700
+    },
+    {
+     "roomTypeId": 51,
+     "name": "Executive Room",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/51",
+     "totalPrice": 63950,
+     "pricePerNight": 63950
+    }
+   ]
+  },
+  "9-1": {
+   "hotelId": 9,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 52,
+     "name": "Premier Room",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/52",
+     "totalPrice": 31875,
+     "pricePerNight": 31875
+    },
+    {
+     "roomTypeId": 53,
+     "name": "Executive Room",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/53",
+     "totalPrice": 31875,
+     "pricePerNight": 31875
+    },
+    {
+     "roomTypeId": 54,
+     "name": "Junior Suite",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/54",
+     "totalPrice": 43750,
+     "pricePerNight": 43750
+    },
+    {
+     "roomTypeId": 55,
+     "name": "Terrace Suite",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/55",
+     "totalPrice": 43750,
+     "pricePerNight": 43750
+    },
+    {
+     "roomTypeId": 56,
+     "name": "Ambiance Executive Suite",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/56",
+     "totalPrice": 56250,
+     "pricePerNight": 56250
+    }
+   ]
+  },
+  "9-2": {
+   "hotelId": 9,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 52,
+     "name": "Premier Room",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/52",
+     "totalPrice": 35325,
+     "pricePerNight": 35325
+    },
+    {
+     "roomTypeId": 53,
+     "name": "Executive Room",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/53",
+     "totalPrice": 35325,
+     "pricePerNight": 35325
+    },
+    {
+     "roomTypeId": 54,
+     "name": "Junior Suite",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/54",
+     "totalPrice": 47200,
+     "pricePerNight": 47200
+    },
+    {
+     "roomTypeId": 55,
+     "name": "Terrace Suite",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/55",
+     "totalPrice": 47200,
+     "pricePerNight": 47200
+    },
+    {
+     "roomTypeId": 56,
+     "name": "Ambiance Executive Suite",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/56",
+     "totalPrice": 59700,
+     "pricePerNight": 59700
+    }
+   ]
+  },
+  "10-1": {
+   "hotelId": 10,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 79,
+     "name": "Business Room (Chalet)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/79",
+     "totalPrice": 38750,
+     "pricePerNight": 38750
+    },
+    {
+     "roomTypeId": 80,
+     "name": "Deluxe Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/80",
+     "totalPrice": 38750,
+     "pricePerNight": 38750
+    },
+    {
+     "roomTypeId": 81,
+     "name": "Executive Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/81",
+     "totalPrice": 46250,
+     "pricePerNight": 46250
+    },
+    {
+     "roomTypeId": 82,
+     "name": "New Imperial Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/82",
+     "totalPrice": 42500,
+     "pricePerNight": 42500
+    },
+    {
+     "roomTypeId": 83,
+     "name": "Chalet Suite",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/83",
+     "totalPrice": 81250,
+     "pricePerNight": 81250
+    },
+    {
+     "roomTypeId": 84,
+     "name": "Executive Suite",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/84",
+     "totalPrice": 93750,
+     "pricePerNight": 93750
+    }
+   ]
+  },
+  "10-2": {
+   "hotelId": 10,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 79,
+     "name": "Business Room (Chalet)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/79",
+     "totalPrice": 42200,
+     "pricePerNight": 42200
+    },
+    {
+     "roomTypeId": 80,
+     "name": "Deluxe Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/80",
+     "totalPrice": 42200,
+     "pricePerNight": 42200
+    },
+    {
+     "roomTypeId": 81,
+     "name": "Executive Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/81",
+     "totalPrice": 49700,
+     "pricePerNight": 49700
+    },
+    {
+     "roomTypeId": 82,
+     "name": "New Imperial Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/82",
+     "totalPrice": 45950,
+     "pricePerNight": 45950
+    },
+    {
+     "roomTypeId": 83,
+     "name": "Chalet Suite",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/83",
+     "totalPrice": 84700,
+     "pricePerNight": 84700
+    },
+    {
+     "roomTypeId": 84,
+     "name": "Executive Suite",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/84",
+     "totalPrice": 97200,
+     "pricePerNight": 97200
+    }
+   ]
+  },
+  "11-1": {
+   "hotelId": 11,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 64,
+     "name": "Single Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/64",
+     "totalPrice": 15000,
+     "pricePerNight": 15000
+    },
+    {
+     "roomTypeId": 65,
+     "name": "Double Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/65",
+     "totalPrice": 17500,
+     "pricePerNight": 17500
+    },
+    {
+     "roomTypeId": 66,
+     "name": "Galaxy Suite with Pantry",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/66",
+     "totalPrice": 20000,
+     "pricePerNight": 20000
+    },
+    {
+     "roomTypeId": 68,
+     "name": "Executive Floor Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/68",
+     "totalPrice": 21875,
+     "pricePerNight": 21875
+    },
+    {
+     "roomTypeId": 72,
+     "name": "Deluxe Suite",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/72",
+     "totalPrice": 23125,
+     "pricePerNight": 23125
+    },
+    {
+     "roomTypeId": 73,
+     "name": "VIP Suite",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/73",
+     "totalPrice": 35000,
+     "pricePerNight": 35000
+    }
+   ]
+  },
+  "11-2": {
+   "hotelId": 11,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 64,
+     "name": "Single Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/64",
+     "totalPrice": 18450,
+     "pricePerNight": 18450
+    },
+    {
+     "roomTypeId": 65,
+     "name": "Double Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/65",
+     "totalPrice": 20950,
+     "pricePerNight": 20950
+    },
+    {
+     "roomTypeId": 66,
+     "name": "Galaxy Suite with Pantry",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/66",
+     "totalPrice": 23450,
+     "pricePerNight": 23450
+    },
+    {
+     "roomTypeId": 68,
+     "name": "Executive Floor Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/68",
+     "totalPrice": 25325,
+     "pricePerNight": 25325
+    },
+    {
+     "roomTypeId": 72,
+     "name": "Deluxe Suite",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/72",
+     "totalPrice": 26575,
+     "pricePerNight": 26575
+    },
+    {
+     "roomTypeId": 73,
+     "name": "VIP Suite",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/73",
+     "totalPrice": 38450,
+     "pricePerNight": 38450
+    }
+   ]
+  },
+  "12-1": {
+   "hotelId": 12,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 85,
+     "name": "Deluxe Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/85",
+     "totalPrice": 20000,
+     "pricePerNight": 20000
+    },
+    {
+     "roomTypeId": 86,
+     "name": "Deluxe Room (double)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/86",
+     "totalPrice": 22500,
+     "pricePerNight": 22500
+    },
+    {
+     "roomTypeId": 87,
+     "name": "Executive Room (SIngle)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/87",
+     "totalPrice": 22500,
+     "pricePerNight": 22500
+    },
+    {
+     "roomTypeId": 88,
+     "name": "Executive Room (double)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/88",
+     "totalPrice": 25000,
+     "pricePerNight": 25000
+    },
+    {
+     "roomTypeId": 89,
+     "name": "Royal Suite",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/89",
+     "totalPrice": 31250,
+     "pricePerNight": 31250
+    },
+    {
+     "roomTypeId": 90,
+     "name": "Deluxe Suite",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/90",
+     "totalPrice": 37500,
+     "pricePerNight": 37500
+    }
+   ]
+  },
+  "12-2": {
+   "hotelId": 12,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 85,
+     "name": "Deluxe Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/85",
+     "totalPrice": 23450,
+     "pricePerNight": 23450
+    },
+    {
+     "roomTypeId": 86,
+     "name": "Deluxe Room (double)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/86",
+     "totalPrice": 25950,
+     "pricePerNight": 25950
+    },
+    {
+     "roomTypeId": 87,
+     "name": "Executive Room (SIngle)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/87",
+     "totalPrice": 25950,
+     "pricePerNight": 25950
+    },
+    {
+     "roomTypeId": 88,
+     "name": "Executive Room (double)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/88",
+     "totalPrice": 28450,
+     "pricePerNight": 28450
+    },
+    {
+     "roomTypeId": 89,
+     "name": "Royal Suite",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/89",
+     "totalPrice": 34700,
+     "pricePerNight": 34700
+    },
+    {
+     "roomTypeId": 90,
+     "name": "Deluxe Suite",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/90",
+     "totalPrice": 40950,
+     "pricePerNight": 40950
+    }
+   ]
+  },
+  "13-1": {
+   "hotelId": 13,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 57,
+     "name": "Deluxe Room",
+     "availableRooms": 3,
+     "imageUrl": "/api/img/room/57",
+     "totalPrice": 21250,
+     "pricePerNight": 21250
+    },
+    {
+     "roomTypeId": 58,
+     "name": "Superior Room",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/58",
+     "totalPrice": 25000,
+     "pricePerNight": 25000
+    },
+    {
+     "roomTypeId": 59,
+     "name": "Junior Suite",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/59",
+     "totalPrice": 28750,
+     "pricePerNight": 28750
+    },
+    {
+     "roomTypeId": 60,
+     "name": "Executive Suite",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/60",
+     "totalPrice": 37500,
+     "pricePerNight": 37500
+    }
+   ]
+  },
+  "13-2": {
+   "hotelId": 13,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 57,
+     "name": "Deluxe Room",
+     "availableRooms": 3,
+     "imageUrl": "/api/img/room/57",
+     "totalPrice": 24700,
+     "pricePerNight": 24700
+    },
+    {
+     "roomTypeId": 58,
+     "name": "Superior Room",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/58",
+     "totalPrice": 28450,
+     "pricePerNight": 28450
+    },
+    {
+     "roomTypeId": 59,
+     "name": "Junior Suite",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/59",
+     "totalPrice": 32200,
+     "pricePerNight": 32200
+    },
+    {
+     "roomTypeId": 60,
+     "name": "Executive Suite",
+     "availableRooms": 8,
+     "imageUrl": "/api/img/room/60",
+     "totalPrice": 40950,
+     "pricePerNight": 40950
+    }
+   ]
+  },
+  "14-1": {
+   "hotelId": 14,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 61,
+     "name": "Standard Room",
+     "availableRooms": 4,
+     "imageUrl": "/api/img/room/61",
+     "totalPrice": 11250,
+     "pricePerNight": 11250
+    },
+    {
+     "roomTypeId": 62,
+     "name": "Deluxe Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/62",
+     "totalPrice": 15000,
+     "pricePerNight": 15000
+    },
+    {
+     "roomTypeId": 63,
+     "name": "Executive Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/63",
+     "totalPrice": 17500,
+     "pricePerNight": 17500
+    }
+   ]
+  },
+  "14-2": {
+   "hotelId": 14,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 61,
+     "name": "Standard Room",
+     "availableRooms": 4,
+     "imageUrl": "/api/img/room/61",
+     "totalPrice": 14700,
+     "pricePerNight": 14700
+    },
+    {
+     "roomTypeId": 62,
+     "name": "Deluxe Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/62",
+     "totalPrice": 18450,
+     "pricePerNight": 18450
+    },
+    {
+     "roomTypeId": 63,
+     "name": "Executive Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/63",
+     "totalPrice": 20950,
+     "pricePerNight": 20950
+    }
+   ]
+  },
+  "15-1": {
+   "hotelId": 15,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 74,
+     "name": "Standard Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/74",
+     "totalPrice": 15625,
+     "pricePerNight": 15625
+    },
+    {
+     "roomTypeId": 75,
+     "name": "Executive Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/75",
+     "totalPrice": 16875,
+     "pricePerNight": 16875
+    },
+    {
+     "roomTypeId": 76,
+     "name": "Suite",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/76",
+     "totalPrice": 16875,
+     "pricePerNight": 16875
+    },
+    {
+     "roomTypeId": 77,
+     "name": "Family Suite (Inter Connect Rooms)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/77",
+     "totalPrice": 26250,
+     "pricePerNight": 26250
+    },
+    {
+     "roomTypeId": 78,
+     "name": "Family Suite (Connect Rooms)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/78",
+     "totalPrice": 31250,
+     "pricePerNight": 31250
+    }
+   ]
+  },
+  "15-2": {
+   "hotelId": 15,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 74,
+     "name": "Standard Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/74",
+     "totalPrice": 19075,
+     "pricePerNight": 19075
+    },
+    {
+     "roomTypeId": 75,
+     "name": "Executive Room",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/75",
+     "totalPrice": 20325,
+     "pricePerNight": 20325
+    },
+    {
+     "roomTypeId": 76,
+     "name": "Suite",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/76",
+     "totalPrice": 20325,
+     "pricePerNight": 20325
+    },
+    {
+     "roomTypeId": 77,
+     "name": "Family Suite (Inter Connect Rooms)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/77",
+     "totalPrice": 29700,
+     "pricePerNight": 29700
+    },
+    {
+     "roomTypeId": 78,
+     "name": "Family Suite (Connect Rooms)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/78",
+     "totalPrice": 34700,
+     "pricePerNight": 34700
+    }
+   ]
+  },
+  "16-1": {
+   "hotelId": 16,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 91,
+     "name": "Classic Room (single)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/91",
+     "totalPrice": 18125,
+     "pricePerNight": 18125
+    },
+    {
+     "roomTypeId": 92,
+     "name": "Classic Room (Double)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/92",
+     "totalPrice": 23125,
+     "pricePerNight": 23125
+    },
+    {
+     "roomTypeId": 93,
+     "name": "Superior Room (single)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/93",
+     "totalPrice": 23125,
+     "pricePerNight": 23125
+    },
+    {
+     "roomTypeId": 94,
+     "name": "Deluxe Room (single)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/94",
+     "totalPrice": 28125,
+     "pricePerNight": 28125
+    },
+    {
+     "roomTypeId": 95,
+     "name": "Superior Room (double)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/95",
+     "totalPrice": 28125,
+     "pricePerNight": 28125
+    },
+    {
+     "roomTypeId": 96,
+     "name": "Deluxe Room (double)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/96",
+     "totalPrice": 33125,
+     "pricePerNight": 33125
+    }
+   ]
+  },
+  "16-2": {
+   "hotelId": 16,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 91,
+     "name": "Classic Room (single)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/91",
+     "totalPrice": 21575,
+     "pricePerNight": 21575
+    },
+    {
+     "roomTypeId": 92,
+     "name": "Classic Room (Double)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/92",
+     "totalPrice": 26575,
+     "pricePerNight": 26575
+    },
+    {
+     "roomTypeId": 93,
+     "name": "Superior Room (single)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/93",
+     "totalPrice": 26575,
+     "pricePerNight": 26575
+    },
+    {
+     "roomTypeId": 94,
+     "name": "Deluxe Room (single)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/94",
+     "totalPrice": 31575,
+     "pricePerNight": 31575
+    },
+    {
+     "roomTypeId": 95,
+     "name": "Superior Room (double)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/95",
+     "totalPrice": 31575,
+     "pricePerNight": 31575
+    },
+    {
+     "roomTypeId": 96,
+     "name": "Deluxe Room (double)",
+     "availableRooms": 5,
+     "imageUrl": "/api/img/room/96",
+     "totalPrice": 36575,
+     "pricePerNight": 36575
+    }
+   ]
+  },
+  "17-1": {
+   "hotelId": 17,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 97,
+     "name": "Deluxe single",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/97",
+     "totalPrice": 40000,
+     "pricePerNight": 40000
+    },
+    {
+     "roomTypeId": 98,
+     "name": "Executive Room",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/98",
+     "totalPrice": 50000,
+     "pricePerNight": 50000
+    },
+    {
+     "roomTypeId": 99,
+     "name": "Junior suite",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/99",
+     "totalPrice": 68750,
+     "pricePerNight": 68750
+    },
+    {
+     "roomTypeId": 100,
+     "name": "Deluxe suite",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/100",
+     "totalPrice": 81250,
+     "pricePerNight": 81250
+    }
+   ]
+  },
+  "17-2": {
+   "hotelId": 17,
+   "currency": "PKR",
+   "dateFrom": "2026-10-29",
+   "dateTo": "2026-10-30",
+   "nights": 1,
+   "roomTypes": [
+    {
+     "roomTypeId": 97,
+     "name": "Deluxe single",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/97",
+     "totalPrice": 43450,
+     "pricePerNight": 43450
+    },
+    {
+     "roomTypeId": 98,
+     "name": "Executive Room",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/98",
+     "totalPrice": 53450,
+     "pricePerNight": 53450
+    },
+    {
+     "roomTypeId": 99,
+     "name": "Junior suite",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/99",
+     "totalPrice": 72200,
+     "pricePerNight": 72200
+    },
+    {
+     "roomTypeId": 100,
+     "name": "Deluxe suite",
+     "availableRooms": 10,
+     "imageUrl": "/api/img/room/100",
+     "totalPrice": 84700,
+     "pricePerNight": 84700
+    }
+   ]
+  }
+ }
+}
