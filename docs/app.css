@@ -202,6 +202,8 @@ tr.insight.v-good td, tr.insight.v-watch td { color: var(--muted); }
 .diff { font-weight: 600; font-size: 14px; }
 .diff.good { color: var(--good); }
 .diff.bad { color: var(--bad); }
+.diff.watch { color: var(--watch); }
+.note { background: var(--watch-soft); color: var(--watch); border-radius: 10px; padding: 10px 14px; font-size: 14px; margin: 14px 0 0; }
 .legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; color: var(--muted); margin: 10px 0 0; }
 @media (max-width: 700px) {
   .ctable, .ctable tbody, .ctable tr, .ctable td { display: block; }
@@ -215,3 +217,8 @@ tr.insight.v-good td, tr.insight.v-watch td { color: var(--muted); }
   .ctable td > span.price, .ctable td > span.num { margin-left: auto; }
   .ctable td .sub { display: none; }
 }
+/* Comparison tables carry six columns: let room names wrap so the table fits a laptop screen. */
+.ctable td { white-space: normal; }
+.ctable td .sub { max-width: 190px; margin-left: auto; }
+.ctable td.hname .sub { margin-left: 0; }
+.ctable .num { white-space: nowrap; }

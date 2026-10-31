@@ -203,10 +203,12 @@ def build_contracts(snaps, refs):
     if not CONTRACTS.exists():
         return None
     latest = snaps[-1]
+    # Discounthotels.pk can be down; then use the last run that reached it, and say when that was.
+    site_snap = next((x for x in reversed(snaps) if x.get("dhc_site")), None)
     out = []
     for c in json.loads(CONTRACTS.read_text(encoding="utf-8"))["hotels"]:
         h = contract_hotel(latest, c["id"])
-        srooms = site_rooms(latest, c.get("dhc_site_id"))
+        srooms = site_rooms(site_snap, c.get("dhc_site_id")) if site_snap else []
         rooms, used = [], set()
         for room in c["rooms"]:
             m = best_match(h, room)
@@ -222,7 +224,7 @@ def build_contracts(snaps, refs):
                     "booking_id": h and h["id"], "booking_name": h and h["name"], "url": h and h["url"],
                     "rooms": rooms, "site_low": min((r["site"] for r in rooms if r["site"]), key=lambda x: x["net"],
                                                     default=None) or site_low(srooms),
-                    "site_rooms": len(srooms), "booking_rooms": len((h or {}).get("rooms", [])),
+                    "site_rooms": len(srooms), "site_at": site_snap and site_snap["taken_at"], "booking_rooms": len((h or {}).get("rooms", [])),
                     "unmatched": sorted({r["name"] for r in (h or {}).get("rooms", []) if r["name"] not in used})})
     return out
 
