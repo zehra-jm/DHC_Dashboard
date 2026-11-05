@@ -275,27 +275,38 @@
 
   // vs = how far Booking.com is above (+) or below (−) the other rate, in % of the other rate.
   // Booking.com higher is good for DHC (green); lower needs a look (red); within 5% is "about the same".
-  function verdict(vs, other) {
+  // The same reading applies to Discounthotels.pk vs the base rate: above the base rate is DHC's margin.
+  function verdict(vs, other, subj) {
     if (vs == null) return null;
-    const p = Math.abs(vs).toFixed(0) + '%';
-    if (vs < 0) return { cls: 'bad', short: p + ' lower', text: 'Booking.com is ' + p + ' lower than ' + other + '.' };
-    if (vs < 5) return { cls: 'watch', short: 'about the same', text: 'Booking.com is within 5% of ' + other + '.' };
-    return { cls: 'good', short: p + ' higher', text: 'Booking.com is ' + p + ' higher than ' + other + '.' };
+    const p = Math.abs(vs).toFixed(0) + '%', who = subj || 'Booking.com';
+    if (vs < 0) return { cls: 'bad', short: p + ' lower', text: who + ' is ' + p + ' lower than ' + other + '.' };
+    if (vs < 5) return { cls: 'watch', short: 'about the same', text: who + ' is within 5% of ' + other + '.' };
+    return { cls: 'good', short: p + ' higher', text: who + ' is ' + p + ' higher than ' + other + '.' };
   }
-  const OTHER = { base: 'the base rate', site: 'Discounthotels.pk' };
-  // One comparison cell: the PKR gap (Booking.com minus the other rate) and the % as a coloured label.
+  // Each comparison page: the rate being judged (subj) against another rate (other).
+  const KINDS = {
+    base: { subj: 'b', other: 'base', who: 'Booking.com', vsName: 'the base rate', title: 'Booking.com vs base rates', col: 'Booking.com vs base rate',
+      intro: 'Each room\'s base rate from the hotel\'s rate letter (PDF) compared with the same room on Booking.com.' },
+    site: { subj: 'b', other: 'site', who: 'Booking.com', vsName: 'Discounthotels.pk', title: 'Booking.com vs Discounthotels.pk', col: 'Booking.com vs Discounthotels.pk',
+      intro: 'Each room\'s rate on Discounthotels.pk compared with the same room on Booking.com.' },
+    margin: { subj: 'site', other: 'base', who: 'Discounthotels.pk', vsName: 'the base rate', title: 'Discounthotels.pk vs base rates', col: 'Discounthotels.pk vs base rate',
+      intro: 'Each room\'s rate on Discounthotels.pk compared with its base rate from the hotel\'s rate letter (PDF). Above the base rate is DHC\'s margin.' }
+  };
+  const OTHER = { base: 'the base rate', site: 'Discounthotels.pk', margin: 'the base rate' };
+  // One comparison cell: the PKR gap (the judged rate minus the other rate) and the % as a coloured label.
   function cmpCell(other, bk, kind) {
     if (other == null || bk == null) return '<span class="na">—</span>';
-    const d = Math.round(bk - other), v = verdict((bk - other) / other * 100, OTHER[kind]);
+    const d = Math.round(bk - other), v = verdict((bk - other) / other * 100, OTHER[kind], KINDS[kind].who);
     return '<span class="diff ' + v.cls + ' num">' + (d > 0 ? '+' : d < 0 ? '−' : '') + n(Math.abs(d)) + '</span><span class="sub"><span class="pill ' + v.cls + '">' + v.short + '</span></span>';
   }
   const vsOf = (other, bk) => other != null && bk != null ? (bk - other) / other * 100 : null;
   // Filter: all rows, rows where DHC's rate is lower than Booking.com, or higher.
   const keep = vs => state.cmp === 'all' || (vs != null && (state.cmp === 'lower' ? vs > 0 : vs < 0));
-  const cmpFilter = () => '<div class="controls">' + seg('cmp', 'Show', [['all', 'All'], ['lower', 'DHC lower'], ['higher', 'DHC higher']], state.cmp) +
+  const cmpFilter = kind => '<div class="controls">' + seg('cmp', 'Show', kind === 'margin' ? [['all', 'All'], ['lower', 'Above base rate'], ['higher', 'Below base rate']] : [['all', 'All'], ['lower', 'DHC lower'], ['higher', 'DHC higher']], state.cmp) +
     seg('order', 'Sort', [['low', 'Lowest price first'], ['high', 'Highest price first']], state.order) + '</div>';
   // Sorts rows by a price; rows with no price go last.
   const byPrice = get => (a, b) => { const x = get(a), y = get(b); return x == null ? 1 : y == null ? -1 : (state.order === 'high' ? y - x : x - y); };
+  const legendMargin = '<p class="legend"><span><span class="pill good">higher</span> Discounthotels.pk is 5% or more above the base rate</span><span><span class="pill watch">about the same</span> within 5%</span><span><span class="pill bad">lower</span> Discounthotels.pk is below the base rate, needs a look</span></p>';
   const legend = '<p class="legend"><span><span class="pill good">higher</span> Booking.com is 5% or more above, good for DHC</span><span><span class="pill watch">about the same</span> within 5%</span><span><span class="pill bad">lower</span> Booking.com is cheaper, needs a look</span></p>';
   function siteNote(list) {
     const at = list.map(h => h.site_at).find(Boolean);
@@ -315,45 +326,45 @@
   }
 
   async function renderRooms(kind) {
-    const list = await getContracts(), rates = getRates();
+    const list = await getContracts(), rates = getRates(), K = KINDS[kind];
     const rows = [];
     list.forEach(h => h.rooms.forEach(r => {
       const c = compare(rates, h.id, r.id), base = c && c.corp, site = r.site && r.site.net, b = r.match && r.match.value;
-      const vs = vsOf(kind === 'base' ? base : site, b);
-      rows.push({ h, r, base, site, b, vs, v: verdict(vs, OTHER[kind]) });
+      const x = { h, r, base, site, b };
+      x.vs = vsOf(x[K.other], x[K.subj]);
+      x.v = verdict(x.vs, K.vsName, K.who);
+      rows.push(x);
     }));
     const cmp = rows.filter(x => x.v);
     const count = cls => cmp.filter(x => x.v.cls === cls).length;
     const att = cmp.filter(x => x.v.cls === 'bad').sort((a, b) => a.vs - b.vs);
-    const title = kind === 'base' ? 'Booking.com vs base rates' : 'Booking.com vs Discounthotels.pk';
-    const intro = kind === 'base' ? 'Each room\'s base rate from the hotel\'s rate letter (PDF) compared with the same room on Booking.com.'
-      : 'Each room\'s rate on Discounthotels.pk compared with the same room on Booking.com.';
+    const title = K.title, intro = K.intro;
 
-    let html = '<div class="pagehead"><h2>' + title + '</h2><p>' + intro + ' All three rates are shown for 2 adults, 1 night from tomorrow, before tax.</p>' + legend + '</div>' +
-      (kind === 'base' && !rates ? ratesPanel(rates) : '') + (kind === 'site' ? siteNote(list) : '') + cmpFilter();
+    let html = '<div class="pagehead"><h2>' + title + '</h2><p>' + intro + ' All three rates are shown for 2 adults, 1 night from tomorrow, before tax.</p>' + (kind === 'margin' ? legendMargin : legend) + '</div>' +
+      (K.other === 'base' && !rates ? ratesPanel(rates) : '') + (kind !== 'base' ? siteNote(list) : '') + cmpFilter(kind);
     html += '<dl class="strip num">' +
-      '<div><dt>Booking.com higher</dt><dd>' + count('good') + '<small>of ' + cmp.length + ' rooms compared</small></dd></div>' +
+      '<div><dt>' + K.who + ' higher</dt><dd>' + count('good') + '<small>of ' + cmp.length + ' rooms compared</small></dd></div>' +
       '<div><dt>About the same</dt><dd>' + count('watch') + '<small>within 5%</small></dd></div>' +
-      '<div><dt>Booking.com lower</dt><dd>' + count('bad') + '<small>needs a look</small></dd></div></dl>';
+      '<div><dt>' + K.who + ' lower</dt><dd>' + count('bad') + '<small>needs a look</small></dd></div></dl>';
     if (att.length && state.cmp !== 'lower') html += '<section class="attn"><h2>Needs a look</h2><ul>' +
       att.map(x => '<li class="bad"><a href="#' + kind + '-' + esc(x.h.id) + '"><strong>' + esc(x.h.name) + '</strong> · ' + esc(x.r.name.replace(/\s*\(.*\)$/, '')) + '</a><span>' + x.v.text + '</span></li>').join('') + '</ul></section>';
     list.forEach(h => {
-      const hr = rows.filter(x => x.h === h && keep(x.vs)).sort(byPrice(x => kind === 'base' ? (x.base != null ? x.base : x.b) : (x.site != null ? x.site : x.b)));
+      const hr = rows.filter(x => x.h === h && keep(x.vs)).sort(byPrice(x => x[K.other] != null ? x[K.other] : x[K.subj]));
       if (state.cmp !== 'all' && !hr.length) return;
       html += '<section class="contract" id="' + kind + '-' + esc(h.id) + '"><h2>' + esc(h.name) + '</h2>' +
         (!h.found ? '<p class="na">Not on Booking.com.</p>' :
         h.booking_rooms === 0 ? '<p class="na">No rooms on sale on Booking.com for tomorrow night.</p>' : '') +
-        '<div class="scroll"><table class="ctable"><thead><tr><th>Room</th><th>Base rate (PDF)</th><th>Discounthotels.pk</th><th>Booking.com</th><th>' + (kind === 'base' ? 'Booking.com vs base rate' : 'Booking.com vs Discounthotels.pk') + '</th></tr></thead><tbody>' +
+        '<div class="scroll"><table class="ctable"><thead><tr><th>Room</th><th>Base rate (PDF)</th><th>Discounthotels.pk</th><th>Booking.com</th><th>' + K.col + '</th></tr></thead><tbody>' +
         hr.map(x => '<tr><td class="hname">' + esc(x.r.name.replace(/\s*\(.*\)$/, '')) + '</td>' +
-          '<td>' + (x.base != null ? '<span class="num' + (kind === 'base' ? ' price' : '') + '">' + n(x.base) + '</span>' : '<span class="na">' + (rates ? '—' : 'load rate sheet') + '</span>') + '</td>' +
-          '<td>' + (x.site != null ? '<span class="num' + (kind === 'site' ? ' price' : '') + '">' + n(x.site) + '</span><span class="sub">' + esc(x.r.site.name) + '</span>' : '<span class="na">—</span>') + '</td>' +
-          '<td>' + (x.b ? '<span class="price num">' + n(x.b) + '</span><span class="sub">' + esc(x.r.match.booking_room) + '</span>' : '<span class="na">' + (h.found && h.booking_rooms ? 'no similar room' : '—') + '</span>') + '</td>' +
-          '<td>' + cmpCell(kind === 'base' ? x.base : x.site, x.b, kind) + '</td></tr>').join('') +
+          '<td>' + (x.base != null ? '<span class="num">' + n(x.base) + '</span>' : '<span class="na">' + (rates ? '—' : 'load rate sheet') + '</span>') + '</td>' +
+          '<td>' + (x.site != null ? '<span class="num' + (K.subj === 'site' ? ' price' : '') + '">' + n(x.site) + '</span><span class="sub">' + esc(x.r.site.name) + '</span>' : '<span class="na">—</span>') + '</td>' +
+          '<td>' + (x.b ? '<span class="' + (K.subj === 'b' ? 'price ' : '') + 'num">' + n(x.b) + '</span><span class="sub">' + esc(x.r.match.booking_room) + '</span>' : '<span class="na">' + (h.found && h.booking_rooms ? 'no similar room' : '—') + '</span>') + '</td>' +
+          '<td>' + cmpCell(x[K.other], x[K.subj], kind) + '</td></tr>').join('') +
         '</tbody></table></div></section>';
     });
-    if (kind === 'base' && rates) html += ratesPanel(rates);
+    if (K.other === 'base' && rates) html += ratesPanel(rates);
     app.innerHTML = '<div class="hgrid">' + html + '</div>';
-    const target = location.hash.match(/^#(?:base|site)-(.+)$/);
+    const target = location.hash.match(/^#(?:base|site|margin)-(.+)$/);
     if (target) { const el = document.getElementById(kind + '-' + target[1]); if (el) el.scrollIntoView(); } else window.scrollTo(0, 0);
   }
 
@@ -378,7 +389,7 @@
     const rows = list.map(c => {
       const b = c.booking_id && byId[c.booking_id], d = dhcLowest(rates, c.id);
       const base = d && d.corp, site = c.site_low, now = b && b.price;
-      return { c, b, base, site, now, vsBase: vsOf(base && base.v, now), vsSite: vsOf(site && site.net, now) };
+      return { c, b, base, site, now, vsBase: vsOf(base && base.v, now), vsSite: vsOf(site && site.net, now), vsMargin: vsOf(base && base.v, site && site.net) };
     });
     rows.sort(byPrice(r => r.now));
     const lowB = rows.filter(r => r.b && r.b.day_low).sort((x, y) => x.b.day_low.price - y.b.day_low.price)[0];
@@ -386,19 +397,20 @@
     const keepRow = r => keep(r.vsSite != null ? r.vsSite : r.vsBase);
 
     let html = '<div class="pagehead"><h2>Lowest rates</h2><p>Each hotel\'s cheapest room: the base rate from its rate letter (PDF), Discounthotels.pk, and Booking.com. 2 adults, 1 night from tomorrow, before tax.</p>' + legend + '</div>' +
-      siteNote(list) + cmpFilter();
+      siteNote(list) + cmpFilter('low');
     html += '<dl class="strip num">' +
       '<div><dt>Booking.com above base rate</dt><dd>' + (rates ? above('vsBase') + ' of ' + total('vsBase') : '—') + '<small>' + (rates ? 'hotels' : 'load the rate sheet') + '</small></dd></div>' +
       '<div><dt>Booking.com above Discounthotels.pk</dt><dd>' + above('vsSite') + ' of ' + total('vsSite') + '<small>hotels</small></dd></div>' +
+      '<div><dt>Discounthotels.pk above base rate</dt><dd>' + (rates ? above('vsMargin') + ' of ' + total('vsMargin') : '—') + '<small>' + (rates ? 'hotels' : 'load the rate sheet') + '</small></dd></div>' +
       '<div><dt>Lowest on Booking.com today</dt><dd>' + (lowB ? n(lowB.b.day_low.price) : '—') + '<small>' + (lowB ? esc(lowB.c.name) : '') + '</small></dd></div></dl>';
-    html += '<section><div class="scroll"><table class="ctable lowtable"><thead><tr><th>Hotel</th><th>Base rate (PDF)</th><th>Discounthotels.pk</th><th>Booking.com</th><th>Booking.com vs base rate</th><th>Booking.com vs Discounthotels.pk</th></tr></thead><tbody>' +
+    html += '<section><div class="scroll"><table class="ctable lowtable"><thead><tr><th>Hotel</th><th>Base rate (PDF)</th><th>Discounthotels.pk</th><th>Booking.com</th><th>Booking.com vs base rate</th><th>Booking.com vs Discounthotels.pk</th><th>Discounthotels.pk vs base rate</th></tr></thead><tbody>' +
       (rows.filter(keepRow).map(r => '<tr><td class="hname">' + (r.b ? '<a href="#h-' + esc(r.b.id) + '">' + esc(r.c.name) + '</a>' : esc(r.c.name)) + '</td>' +
           '<td>' + (r.base ? '<span class="num">' + n(r.base.v) + '</span><span class="sub">' + esc(roomLabel(list, r.c, r.base.room)) + '</span>' : '<span class="na">' + (rates ? '—' : 'load rate sheet') + '</span>') + '</td>' +
           '<td>' + (r.site ? '<span class="num">' + n(r.site.net) + '</span><span class="sub">' + esc(r.site.name) + '</span>' : '<span class="na">—</span>') + '</td>' +
           '<td>' + (!r.c.found ? '<span class="na">not on Booking.com</span>' : r.now ? '<span class="price num">' + n(r.now) + '</span><span class="sub">' + esc(r.b.low_room ? r.b.low_room.name : '') +
             (r.b.day_low && r.b.day_high && r.b.day_high.price !== r.b.day_low.price ? ' · today ' + n(r.b.day_low.price) + '–' + n(r.b.day_high.price) : '') + '</span>' : '<span class="na">no rooms on sale</span>') + '</td>' +
-          '<td>' + cmpCell(r.base && r.base.v, r.now, 'base') + '</td><td>' + cmpCell(r.site && r.site.net, r.now, 'site') + '</td></tr>'
-      ).join('') || '<tr><td colspan="6" class="na">No hotels match this filter.</td></tr>') + '</tbody></table></div></section>' +
+          '<td>' + cmpCell(r.base && r.base.v, r.now, 'base') + '</td><td>' + cmpCell(r.site && r.site.net, r.now, 'site') + '</td><td>' + cmpCell(r.base && r.base.v, r.site && r.site.net, 'margin') + '</td></tr>'
+      ).join('') || '<tr><td colspan="7" class="na">No hotels match this filter.</td></tr>') + '</tbody></table></div></section>' +
       ratesPanel(rates).replace('<strong>Load the DHC rate sheet to compare.</strong>', '<strong>Base rates need the rate sheet.</strong>');
     app.innerHTML = '<div class="hgrid">' + html + '</div>';
     window.scrollTo(0, 0);
@@ -417,7 +429,7 @@
 
   function setNav() {
     const hsh = location.hash;
-    const view = /^#(base|dhc)/.test(hsh) ? 'base' : /^#site/.test(hsh) ? 'site' : /^#(market|h-)/.test(hsh) ? 'market' : 'low';
+    const view = /^#(base|dhc)/.test(hsh) ? 'base' : /^#site/.test(hsh) ? 'site' : /^#margin/.test(hsh) ? 'margin' : /^#(market|h-)/.test(hsh) ? 'market' : 'low';
     document.querySelectorAll('.nav a').forEach(a => a.setAttribute('aria-current', a.dataset.view === view ? 'page' : 'false'));
   }
 
@@ -436,6 +448,7 @@
     const m = location.hash.match(/^#h-(.+)$/);
     if (/^#(base|dhc)/.test(location.hash)) renderRooms('base');
     else if (/^#site/.test(location.hash)) renderRooms('site');
+    else if (/^#margin/.test(location.hash)) renderRooms('margin');
     else if (m) renderHotel(decodeURIComponent(m[1]));
     else if (location.hash === '#market') renderOverview();
     else renderLowest();  // the landing view
