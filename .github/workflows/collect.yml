@@ -23,7 +23,7 @@ concurrency:
 
 jobs:
   collect:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 55
     environment:
       name: github-pages
@@ -123,7 +123,7 @@ jobs:
   next:
     needs: collect
     if: always() && (github.event_name == 'schedule' || inputs.collect)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 70
     steps:
       - name: Wait until the next hour
