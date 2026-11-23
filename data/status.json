@@ -1,8 +1,8 @@
 {
- "state": "ok",
- "message": "12 hotels, 17 room rates.",
- "checked_at": "2026-11-23T22:18+05:00",
- "since": "2026-11-23T21:17+05:00",
- "last_ok": "2026-11-23T22:18+05:00",
- "alert": false
+ "state": "rooms",
+ "message": "No room rates could be read on 6 of 9 hotel pages.",
+ "checked_at": "2026-11-23T23:22+05:00",
+ "since": "2026-11-23T23:22+05:00",
+ "last_ok": "2026-11-23T23:22+05:00",
+ "alert": true
 }
