@@ -1,8 +1,8 @@
 {
  "state": "ok",
  "message": "9 hotels, 21 room rates.",
- "checked_at": "2026-11-24T01:20+05:00",
+ "checked_at": "2026-11-24T02:18+05:00",
  "since": "2026-11-24T00:18+05:00",
- "last_ok": "2026-11-24T01:20+05:00",
+ "last_ok": "2026-11-24T02:18+05:00",
  "alert": false
 }
